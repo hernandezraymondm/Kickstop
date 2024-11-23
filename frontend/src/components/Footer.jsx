@@ -29,8 +29,16 @@ const Footer = () => {
     <footer className="footer p-10 bg-base-200 text-base-content">
       <div className="flex justify-between w-full max-w-[1600px] mx-auto">
         <aside>
-          <h2 className="text-3xl">Kickstop</h2>
-          <p>Your one-stop shop for the latest kicks and trends</p>
+          <h2 className="text-3xl">KICKSTOP</h2>
+          <p>Your one-stop shop for the latest kicks and trends.</p>
+          <p>
+            This e-commerce platform offers a seamless and dynamic shopping
+            experience,
+          </p>
+          <p>
+            powered by modern web technologies to ensure smooth and responsive
+            user interactions.
+          </p>
         </aside>
         <nav>
           <h6 className="footer-title">Social</h6>
@@ -72,8 +80,8 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title">Support</h6>
-          <a className="link link-hover">rayhernandez.dev@gmail.com</a>
-          <a className="link link-hover">+639 15 529 3986</a>
+          <a className="link link-hover block">rayhernandez.dev@gmail.com</a>
+          <a className="link link-hover block">+639 15 529 3987</a>
         </nav>
         <form onSubmit={handleSubscribe}>
           <h6 className="footer-title">Newsletter</h6>

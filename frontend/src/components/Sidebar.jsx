@@ -3,7 +3,7 @@ import HamburgerMenu from './HamburgerMenu';
 
 const Sidebar = () => {
   return (
-    <div className="fixed left-0 top-0 w-20 h-full bg-base-100 flex flex-col justify-between items-center py-4">
+    <aside className="fixed left-0 top-0 w-20 h-full bg-base-100 flex flex-col justify-between items-center py-4">
       {/* Hamburger Menu */}
       <button className="btn btn-ghost btn-circle">
         <HamburgerMenu />
@@ -77,7 +77,7 @@ const Sidebar = () => {
           </a>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

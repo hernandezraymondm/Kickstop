@@ -28,7 +28,7 @@ router.post('/create-checkout-session', async (req, res) => {
     products.map((product) => ({
       name: product.name,
       quantity: product.quantity,
-      price: product.priceInCents * 100,
+      price: product.priceInCents,
     }))
   );
 

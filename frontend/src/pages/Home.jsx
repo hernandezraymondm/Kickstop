@@ -22,28 +22,32 @@ const Home = () => {
   return (
     <>
       <section
-        className="section hero bg-cover bg-center p-32  mx-auto  font-nunito"
-        style={{ backgroundImage: "url('/assets/images/hero-banner4.png')" }}
+        className="section hero bg-cover bg-center p-32 mx-auto font-nunito"
+        style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
       >
-        <div className="hero-content mb-24 mx-auto  py-9 flex items-start flex-col w-full">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 block text-accent">
-            New Summer <strong className="block">Shoes Collection</strong>
+        <div className="hero-content mb-10 mx-auto py-9 flex items-start flex-col w-full max-w-[1350px]">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 block text-accent">
+            Discover the Latest
+            <strong className="block md:text-6xl">Shoes Collection</strong>
           </h1>
-          <p className="text-lg md:text-xl mb-8 bloc max-w-[46ch] text-accent-content">
-            Competently expedite alternative benefits whereas leading-edge
-            catalysts for change. Globally leverage existing an expanded array
-            of leadership.
+          <p className="text-lg md:text-xl max-w-[46ch] text-accent-content mb-4">
+            Step into the season with our latest styles. Discover unparalleled
+            comfort and trendsetting designs that take your footwear game to the
+            next level. Elevate your wardrobe with the perfect blend of fashion
+            and functionality, designed for the modern lifestyle.
           </p>
           <a
             href="/shop"
-            className="btn btn-secondary inline-flex items-center space-x-2 text-accent-content font-semibold"
+            className="btn btn-secondary inline-flex items-center space-x-2 text-white font-semibold"
           >
             <span>EXPLORE OUR STORE</span>
             <ArrowIcon />
           </a>
         </div>
       </section>
-      <ProductCard product={latestProducts} />
+      <section className="pb-20">
+        <ProductCard product={latestProducts} />
+      </section>
     </>
     // <section className="p-4 max-w-[1400px] mx-auto my-16">
     //   <div className="hero-content text-center mb-24">

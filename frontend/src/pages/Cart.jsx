@@ -55,7 +55,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="p-4 mt-16 max-w-[1400px] mx-auto">
+    <div className="p-4 my-16 max-w-[1400px] mx-auto">
       <h2 className="text-2xl font-semibold text-center my-6">Shopping Cart</h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -71,7 +71,7 @@ const Cart = () => {
             />
             <h2 className="text-lg font-bold mb-2">{item.name}</h2>
             <p className="text-md mb-1">
-              Price: ${(item.priceInCents / 100).toFixed(2)}
+              Price: ₱{item.priceInCents.toFixed(2)}
             </p>
             <div className="flex items-center justify-between text-md mb-3">
               <p>Quantity: {item.quantity}</p>
@@ -90,7 +90,7 @@ const Cart = () => {
 
       <div className="text-center mt-8">
         <p className="text-2xl font-semibold mb-4">
-          Total Price: ${(totalPrice / 100).toFixed(2)}
+          Total Price: ₱{totalPrice.toFixed(2)}
         </p>
         <button onClick={handleCheckout} className="btn btn-secondary">
           Proceed to Checkout
