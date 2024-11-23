@@ -10,8 +10,9 @@ router.post('/', auth, async (request, response) => {
     if (
       !request.body.name ||
       !request.body.priceInCents ||
-      !request.body.image ||
-      !request.body.category
+      !request.body.category ||
+      !request.body.target ||
+      !request.body.image
     ) {
       return response.status(400).send({
         message: 'Required fields are missing',
@@ -21,9 +22,10 @@ router.post('/', auth, async (request, response) => {
     const newProduct = {
       name: request.body.name,
       priceInCents: request.body.priceInCents,
+      category: request.body.category,
+      target: request.body.target,
       description: request.body.description,
       image: request.body.image,
-      category: request.body.category,
     };
 
     const product = await Product.create(newProduct);
@@ -69,7 +71,8 @@ router.put('/:id', auth, async (request, response) => {
     if (
       !request.body.name ||
       !request.body.priceInCents ||
-      !request.body.category
+      !request.body.category ||
+      !request.body.target
     ) {
       return response.status(400).send({
         message: 'Required fields are missing',

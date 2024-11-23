@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
+import Rating from './rating/Rating';
 
 const ProductSingleCard = ({ product }) => {
   const { addToCart, removeFromCart, cartItems } = useCart();
@@ -17,20 +18,34 @@ const ProductSingleCard = ({ product }) => {
   };
 
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="card card-compact w-80 my-5 bg-base-100 shadow-xl">
       <figure>
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-[300px] object-cover object-top"
+          className="w-full h-[250px] object-cover object-center"
         />
       </figure>
 
-      <div className="card-body bg-base-200">
-        <h2 className="card-title">{product.name}</h2>
+      <div className="card-body bg-base-200 rounded-b-xl">
+        <p className="target">
+          {product.target} / {product.category}
+        </p>
+        <h2 className="card-title whitespace-nowrap font-bold text-2xl text-accent">
+          {product.name}{' '}
+          {product.category === 'Featured' ? (
+            <div className="badge badge-info">NEW</div>
+          ) : (
+            ''
+          )}
+        </h2>
         <p>{product.description || 'No description available.'}</p>
-        <div className="price">₱{product.priceInCents.toFixed(2)}</div>
-
+        <div>
+          <Rating />
+          <span className="price text-secondary font-bold px-2 ml-2 border-l-2 border-gray-400">
+            ₱{product.priceInCents.toFixed(2)}
+          </span>
+        </div>
         <div className="card-actions justify-end">
           {quantity > 0 ? (
             <button className="btn btn-error" onClick={handleRemoveFromCart}>

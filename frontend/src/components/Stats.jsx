@@ -61,13 +61,15 @@ const Stats = () => {
         </div>
       </div>
 
-      <div className="stats shadow bg-secondary text-accent-content">
+      <div className="stats shadow bg-green-600 text-accent-content">
         <div className="stat">
           <div className="stat-title text-base-100">Total Purchases</div>
           <div className="stat-value">
             {loading ? 'Loading...' : stats.totalCharges}
           </div>
-          <div className="stat-desc">21% more than last month</div>
+          <div className="stat-desc text-accent-content">
+            21% more than last month
+          </div>
         </div>
       </div>
     </div>

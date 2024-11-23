@@ -3,7 +3,7 @@ import ProductSingleCard from './ProductSingleCard';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 max-w-[1400px] gap-6 mx-auto place-items-center">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 max-w-[1450px] gap-6 mx-auto place-items-center">
       {Array.isArray(product) &&
         product.map((item) => (
           <ProductSingleCard key={item._id} product={item} />

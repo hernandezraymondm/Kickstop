@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       {isAdminRoute ? <AdminNavbar /> : <Navbar />}
-      {isAdminRoute ? <Sidebar /> : <Sidebar />}
+      {isAdminRoute ? '' : <Sidebar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

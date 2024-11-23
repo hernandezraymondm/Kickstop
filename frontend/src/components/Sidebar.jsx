@@ -28,7 +28,7 @@ const Sidebar = () => {
           <li className="my-4">
             <div className="transform -rotate-90">
               <a href="#" className="text-accent-content text-lg">
-                Sports
+                Bestsellers
               </a>
             </div>
           </li>
