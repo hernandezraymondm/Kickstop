@@ -29,7 +29,7 @@ const CartIcon = () => {
               />
             </svg>
 
-            <span className="badge badge-sm indicator-item bg-accent text-black rounded-full">
+            <span className="badge badge-sm indicator-item bg-secondary text-white rounded-full">
               {totalQuantity}
             </span>
           </div>
@@ -37,7 +37,7 @@ const CartIcon = () => {
         {totalQuantity > 0 && (
           <div
             tabIndex={0}
-            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+            className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
             <div className="card-body">
               <span className="font-bold text-lg">{totalQuantity}</span>

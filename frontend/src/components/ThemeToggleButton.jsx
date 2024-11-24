@@ -25,7 +25,10 @@ const ThemeToggleButton = () => {
   };
 
   return (
-    <div>
+    <div
+      className="tooltip tooltip-bottom"
+      data-tip={!isdarkMode ? 'Dark mode' : 'Light mode'}
+    >
       <label className="swap swap-rotate btn btn-ghost btn-circle text-secondary">
         <input type="checkbox" checked={isdarkMode} onChange={toggleTheme} />
 

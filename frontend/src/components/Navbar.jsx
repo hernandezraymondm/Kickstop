@@ -15,7 +15,7 @@ const Navbar = () => {
       : '';
 
   return (
-    <header className="navbar max-w-[1600px] mx-auto text-accent-content uppercase">
+    <header className="navbar max-w-[1600px] mx-auto text-accent-content">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -36,7 +36,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-none w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-none w-52 uppercase"
           >
             <li>
               <Link to="/" className={getLinkClass('/')}>
@@ -67,13 +67,13 @@ const Navbar = () => {
             height="40"
             alt="logo"
           />
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-4xl font-bold uppercase">
             <span className="text-secondary">K</span>ickstop
           </h1>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu-horizontal px-1 gap-8 rounded-box">
+        <ul className="menu-horizontal px-1 gap-8 rounded-box uppercase">
           <li>
             <Link to="/" className={getLinkClass('/')}>
               <span className="btn btn-ghost text-lg font-semibold">Home</span>
@@ -100,17 +100,14 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end gap-5">
-        <Link to="/login">
-          <SearchIcon />
-        </Link>
-        <Link to="/cart">
+        <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Liked">
           <HeartIcon />
         </Link>
-        <Link to="/cart">
+        <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Cart">
           <CartIcon />
         </Link>
         <ThemeToggleButton />
-        <Link to="/login">
+        <Link to="/login" className="tooltip tooltip-bottom" data-tip="Account">
           <UserIcon />
         </Link>
       </div>

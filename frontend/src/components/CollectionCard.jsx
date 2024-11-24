@@ -9,7 +9,7 @@ const CollectionCard = ({ name, background }) => {
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="card-body items-center text-center">
-          <h2 className="card-title pb-52 text-black">{name}</h2>
+          <h2 className="card-title pb-32 text-black">{name}</h2>
           <div className="card-actions">
             <button className="btn-ghost btn-primary flex items-center gap-2 font-semibold text-lg border-2 border-current py-2 px-4 text-black hover:border-current hover:bg-secondary">
               Explore All

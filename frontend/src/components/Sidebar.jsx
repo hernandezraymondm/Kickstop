@@ -3,7 +3,7 @@ import HamburgerMenu from './HamburgerMenu';
 
 const Sidebar = () => {
   return (
-    <aside className="fixed left-0 top-0 w-20 h-full bg-base-100 flex flex-col justify-between items-center py-4">
+    <aside className="fixed left-0 top-0 w-20 h-full bg-base-100 flex flex-col justify-between items-center py-4 z-10">
       {/* Hamburger Menu */}
       <button className="btn btn-ghost btn-circle">
         <HamburgerMenu />
