@@ -1,82 +1,150 @@
-import React from 'react';
-import HamburgerMenu from './HamburgerMenu';
+import React, { useState } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 
 const Sidebar = () => {
-  return (
-    <aside className="fixed left-0 top-0 w-20 h-full bg-base-100 flex flex-col justify-between items-center py-4 z-10">
-      {/* Hamburger Menu */}
-      <button className="btn btn-ghost btn-circle">
-        <HamburgerMenu />
-      </button>
-      <div className="flex flex-col items-center -mt-16">
-        {/* Rotated Text */}
-        <ul className="list-none p-0 flex flex-col space-y-28 uppercase font-semibold text-center">
-          <li className="my-2">
-            <div className="transform -rotate-90">
-              <a href="#" className="text-accent-content text-lg">
-                Collection
-              </a>
-            </div>
-          </li>
-          <li className="my-4">
-            <div className="transform -rotate-90">
-              <a href="#" className="text-secondary text-lg">
-                Featured
-              </a>
-            </div>
-          </li>
-          <li className="my-4">
-            <div className="transform -rotate-90">
-              <a href="#" className="text-accent-content text-lg">
-                Bestsellers
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
+  const [isOpen, setIsOpen] = useState(true);
 
-      <div className="flex flex-col items-center">
-        {/* Icons at the Bottom */}
-        <div className="my-2">
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-            </svg>
-          </a>
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <aside className="fixed w-20 h-screen bg-base-100 flex flex-col justify-between items-center -mt-16 py-2 text-accent-content">
+      {/* Hamburger Menu */}
+      <button className="btn-ghost rounded-lg" onClick={toggleSidebar}>
+        <svg
+          viewBox="0 0 32 32"
+          className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
+        >
+          <path
+            className="line line-top-bottom"
+            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            className="line"
+            d="M7 16 27 16"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className="flex flex-col items-center -mt-16">
+          {/* Rotated Text */}
+          <ul className="list-none p-0 flex flex-col space-y-32 uppercase font-semibold text-center">
+            <li>
+              <div className="transform -rotate-90 text-left">
+                <ScrollLink
+                  to="featured"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  activeClass="text-secondary"
+                  className="btn-ghost rounded-lg p-2 text-accent-content text-lg cursor-pointer"
+                >
+                  Featured
+                </ScrollLink>
+              </div>
+            </li>
+            <li>
+              <div className="transform -rotate-90">
+                <ScrollLink
+                  to="collection"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  activeClass="text-secondary"
+                  className="btn-ghost rounded-lg p-2 text-lg cursor-pointer"
+                >
+                  Collection
+                </ScrollLink>
+              </div>
+            </li>
+            <li>
+              <div className="transform -rotate-90">
+                <ScrollLink
+                  to="bestsellers"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  activeClass="text-secondary"
+                  className="btn-ghost rounded-lg p-2 text-accent-content text-lg cursor-pointer"
+                >
+                  Bestsellers
+                </ScrollLink>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div className="my-2">
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-            </svg>
-          </a>
+      )}
+
+      {isOpen && (
+        <div className="flex flex-col items-center">
+          {/* Icons at the Bottom */}
+          <div className="btn btn-ghost">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-twitter"
+              >
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+          </div>
+          <div className="btn btn-ghost">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-instagram"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+            </a>
+          </div>
+          <div className="btn btn-ghost">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-facebook"
+              >
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+          </div>
         </div>
-        <div className="my-2">
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
+      )}
     </aside>
   );
 };

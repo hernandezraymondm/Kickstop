@@ -24,12 +24,12 @@ const Home = () => {
   return (
     <>
       <section
-        className="section hero bg-cover bg-no-repeat bg-center py-2 px-[62px] mb-5 mx-auto font-nunito"
-        style={{ backgroundImage: "url('/assets/images/hero-banner2.png')" }}
+        className="section hero bg-cover bg-no-repeat bg-center py-2 lg:px-[62px] mb-5 mx-auto font-nunito"
+        style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
       >
         <div className="hero-content relative mx-auto w-full grid lg:grid-cols-2">
           <div>
-            <h1 className="text-4xl mt-5 md:text-5xl  font-semibold mb-4 block text-accent">
+            <h1 className="text-4xl mt-5 md:text-5xl font-semibold mb-4 block text-accent">
               Discover the Latest
               <strong className="block md:text-6xl">Shoes Collection</strong>
             </h1>
@@ -73,7 +73,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section service">
+      <section className="section service lg:px-[62px]">
         <div className="container mx-auto max-w-[1470px]">
           <ul className="service-list flex flex-wrap justify-evenly">
             <li className="service-item p-4">
@@ -170,25 +170,27 @@ const Home = () => {
           </ul>
         </div>
       </section>
-      <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
-        <div className="divider uppercase my-10">Collection</div>
-      </h1>
 
-      <section className="grid md:grid-cols-2 lg:grid-cols-3 max-w-[1350px] gap-7 mx-auto place-items-center">
-        <CollectionCard
-          name="MENS COLLECTION"
-          background="/assets/images/collection-1.jpg"
-        />
-        <CollectionCard
-          name="WOMEN COLLECTION"
-          background="/assets/images/collection-2.jpg"
-        />
-        <CollectionCard
-          name="SPORTS COLLECTION"
-          background="/assets/images/collection-3.jpg"
-        />
+      <section id="collection" className="lg:px-12">
+        <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
+          <div className="divider uppercase my-10">Collection</div>
+        </h1>
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 max-w-[1450px] gap-y-7 mx-auto place-items-center">
+          <CollectionCard
+            name="MENS COLLECTION"
+            background="/assets/images/collection-1.jpg"
+          />
+          <CollectionCard
+            name="WOMEN COLLECTION"
+            background="/assets/images/collection-2.jpg"
+          />
+          <CollectionCard
+            name="SPORTS COLLECTION"
+            background="/assets/images/collection-3.jpg"
+          />
+        </div>
       </section>
-      <section className="bestsellers">
+      <section id="bestsellers" className="lg:px-28">
         <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
           <div className="divider uppercase my-10">Bestsellers</div>
         </h1>

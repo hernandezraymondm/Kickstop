@@ -1,5 +1,5 @@
 import React from 'react';
-
+<aside className="fixed w-20 h-screen bg-base-100 flex flex-col justify-between items-center -mt-16 py-2 text-accent-content"></aside>;
 const HamburgerMenu = () => {
   return (
     <label className="cursor-pointer relative">

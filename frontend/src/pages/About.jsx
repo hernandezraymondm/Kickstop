@@ -13,7 +13,10 @@ const About = () => {
             exclusive collection of shoes that combine style, comfort, and
             durability.
           </p>
-          <a href="/shop" className="btn btn-secondary mt-4 mb-12">
+          <a
+            href="/shop"
+            className="btn btn-secondary mt-4 mb-12 text-white text-md font-bold"
+          >
             Shop Now
           </a>
           <h1 className="text-4xl font-bold text-center mb-6">

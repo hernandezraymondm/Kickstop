@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
-      style={{ backgroundImage: "url('/assets/images/hero-banner2.png')" }}
+      style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
     >
       <h2 className="text-2xl font-bold mb-10">Log In</h2>
       {statusMessage && (

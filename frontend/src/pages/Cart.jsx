@@ -92,7 +92,10 @@ const Cart = () => {
         <p className="text-2xl font-semibold mb-4">
           Total Price: ₱{totalPrice.toFixed(2)}
         </p>
-        <button onClick={handleCheckout} className="btn btn-secondary">
+        <button
+          onClick={handleCheckout}
+          className="btn btn-secondary text-white text-lg font-bold "
+        >
           Proceed to Checkout
         </button>
       </div>
