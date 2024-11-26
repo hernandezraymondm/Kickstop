@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggleButton from './ThemeToggleButton';
 import CartIcon from './Icon/CartIcon';
@@ -7,11 +7,6 @@ import HeartIcon from './Icon/HeartIcon';
 
 const Navbar = ({ toggleSidebar }) => {
   const location = useLocation();
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
 
   const getLinkClass = (path) =>
     location.pathname === path
@@ -103,70 +98,53 @@ const Navbar = ({ toggleSidebar }) => {
         <Link to="/login" className="tooltip tooltip-bottom" data-tip="Account">
           <UserIcon />
         </Link>
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn-ghost rounded-lg mx-2 lg:hidden"
-          >
-            <label className="cursor-pointer relative">
-              <input
-                type="checkbox"
-                className="hidden"
-                checked={isDropdownOpen}
-                onChange={toggleDropdown}
-              />
-              <svg
-                viewBox="0 0 32 32"
-                className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
-              >
-                <path
-                  className="line line-top-bottom"
-                  d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-                <path
-                  className="line"
-                  d="M7 16 27 16"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-              </svg>
-            </label>
-          </div>
-          {isDropdownOpen && (
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52 uppercase"
+        <details className="dropdown dropdown-end lg:hidden">
+          <summary className="btn btn-ghost hamburger">
+            <svg
+              viewBox="0 0 32 32"
+              className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
             >
-              <li>
-                <Link to="/" className={getLinkClass('/')}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/shop" className={getLinkClass('/shop')}>
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className={getLinkClass('/about')}>
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className={getLinkClass('/contact')}>
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
+              <path
+                className="line line-top-bottom"
+                d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+              <path
+                className="line"
+                d="M7 16 27 16"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+          </summary>
+          <ul className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52 uppercase">
+            <li>
+              <Link to="/" className={getLinkClass('/')}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" className={getLinkClass('/shop')}>
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className={getLinkClass('/about')}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className={getLinkClass('/contact')}>
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </details>
       </div>
     </div>
   );

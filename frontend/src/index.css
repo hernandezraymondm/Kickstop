@@ -16,12 +16,11 @@
   animation: spin 1s linear infinite;
 }
 
-/* Hamburger styles */
 .hamburger {
   cursor: pointer;
 }
 
-.hamburger input {
+.hamburger div {
   display: none;
 }
 
@@ -43,11 +42,11 @@
   stroke-dasharray: 12 63;
 }
 
-input:checked + svg {
+details[open] .hamburger svg {
   transform: rotate(-45deg);
 }
 
-input:checked + svg .line-top-bottom {
+details[open] .hamburger .line-top-bottom {
   stroke-dasharray: 20 300;
   stroke-dashoffset: -32.42;
 }
