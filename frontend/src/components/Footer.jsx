@@ -26,8 +26,8 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content">
-      <div className="flex justify-between w-full max-w-[1600px] mx-auto">
+    <footer className="footer p-10 md:px-24 bg-base-200 text-base-content">
+      <div className="flex justify-between flex-wrap w-full max-w-[1600px] mx-auto">
         <aside>
           <h2 className="text-3xl">KICKSTOP</h2>
           <p>Your one-stop shop for the latest kicks and trends.</p>

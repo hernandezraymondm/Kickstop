@@ -39,9 +39,9 @@ const Shop = () => {
   }, [product, category]);
 
   return (
-    <div className="p-4 max-w-[1600px] mx-auto mt-16">
-      <div className="filters flex justify-between mb-6">
-        <div className="form-control">
+    <div className="p-4 max-w-[1450px] mx-auto mt-16">
+      <div className="filters flex justify-end mb-6">
+        <div className="form-control max-w-[1450px]">
           <label className="label">
             <span className="label-text">Category</span>
           </label>
@@ -58,7 +58,6 @@ const Shop = () => {
           </select>
         </div>
       </div>
-
       <ProductCard product={filteredProducts} />
     </div>
   );

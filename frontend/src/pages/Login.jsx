@@ -42,7 +42,7 @@ const Login = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
+      className="flex flex-col items-center justify-start py-40 min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
       style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
     >
       <h2 className="text-2xl font-bold mb-10">Log In</h2>
@@ -98,7 +98,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-800 font-semibold text-white rounded-md py-2 px-4 w-full"
+          className="bg-orange-600 hover:bg-orange-700 font-semibold text-white rounded-md py-2 px-4 w-full"
         >
           Log In
         </button>
@@ -107,7 +107,7 @@ const Login = () => {
         <p className="mt-4 inline-block">Don't have an account?</p>
         <Link
           to="/register"
-          className="text-blue-500 hover:text-blue-800 text-xl font-medium ml-2"
+          className="text-orange-600 hover:text-orange-700 text-xl font-medium ml-2"
         >
           Register
         </Link>

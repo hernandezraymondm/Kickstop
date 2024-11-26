@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="min-h-screen grid grid-cols-[auto_1fr]">
       <header id="featured" className="col-span-2">
-        {isAdminRoute ? <AdminNavbar /> : <Navbar />}
+        {isAdminRoute ? (
+          <AdminNavbar />
+        ) : (
+          <Navbar toggleSidebar={toggleSidebar} />
+        )}
       </header>
 
       {!isAdminRoute && (
-        <aside className="hidden lg:block">
-          <Sidebar />
+        <aside className="block">
+          <Sidebar isOpen={isOpen} />
         </aside>
       )}
 

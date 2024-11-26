@@ -28,12 +28,12 @@ const Home = () => {
         style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
       >
         <div className="hero-content relative mx-auto w-full grid lg:grid-cols-2">
-          <div>
+          <div className="text-center lg:text-left">
             <h1 className="text-4xl mt-5 md:text-5xl font-semibold mb-4 block text-accent">
               Discover the Latest
               <strong className="block md:text-6xl">Shoes Collection</strong>
             </h1>
-            <p className="text-lg md:text-xl max-w-[46ch] text-accent-content mb-4">
+            <p className="mx-auto text-lg lg:mx-0 md:text-xl max-w-[46ch] text-accent-content mb-4">
               Step into the season with our latest styles. Discover unparalleled
               comfort and trendsetting designs that take your footwear game to
               the next level. Elevate your wardrobe with the perfect blend of

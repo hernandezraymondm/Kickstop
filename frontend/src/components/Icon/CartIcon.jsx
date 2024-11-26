@@ -40,7 +40,9 @@ const CartIcon = () => {
             className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
             <div className="card-body">
-              <span className="font-bold text-lg">{totalQuantity}</span>
+              <span className="font-bold text-lg text-accent-content">
+                Items: {totalQuantity}
+              </span>
               <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
               </div>

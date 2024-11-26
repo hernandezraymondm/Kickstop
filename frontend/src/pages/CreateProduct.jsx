@@ -211,7 +211,7 @@ const CreateProduct = () => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="input input-bordered input-accent w-full px-4 py-2"
+            className="file-input file-input-bordered input-accent w-full"
             required
           />
 
