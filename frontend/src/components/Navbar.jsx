@@ -98,8 +98,8 @@ const Navbar = ({ toggleSidebar }) => {
         <Link to="/login" className="tooltip tooltip-bottom" data-tip="Account">
           <UserIcon />
         </Link>
-        <details className="dropdown dropdown-end lg:hidden">
-          <summary className="btn btn-ghost hamburger">
+        <details className="dropdown dropdown-end ">
+          <summary className="btn btn-ghost hamburger lg:hidden">
             <svg
               viewBox="0 0 32 32"
               className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
