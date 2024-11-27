@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import Navbar from './Navbar';
@@ -8,8 +8,13 @@ import Footer from './Footer';
 const Layout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const isHome = location.pathname === '/';
 
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    setIsOpen(isHome);
+  }, [isHome]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -25,21 +30,23 @@ const Layout = () => {
         )}
       </header>
 
-      {!isAdminRoute && (
-        <aside className="block">
+      {isHome && (
+        <aside className="hidden md:block">
           <Sidebar isOpen={isOpen} />
         </aside>
       )}
 
       <main
-        className={`col-span-2 ${
-          isAdminRoute ? 'lg:col-span-2' : 'lg:col-span-1'
-        }`}
+        className={`col-span-2 ${isHome ? 'lg:col-span-1' : 'lg:col-span-2'}`}
       >
         <Outlet />
       </main>
 
-      {!isAdminRoute && <footer className="col-span-2">{<Footer />}</footer>}
+      {!isAdminRoute && (
+        <footer className="col-span-2">
+          <Footer />
+        </footer>
+      )}
     </div>
   );
 };

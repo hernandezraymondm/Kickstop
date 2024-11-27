@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ArrowIcon from '../components/Icon/ArrowIcon';
 import Rating from '../components/rating/Rating';
@@ -42,13 +43,13 @@ const Home = () => {
               fashion and functionality, designed for the modern lifestyle.
             </p>
 
-            <a
-              href="/shop"
+            <Link
+              to="/shop"
               className="btn btn-secondary inline-flex items-center space-x-2 text-white font-semibold"
             >
               <span>EXPLORE OUR STORE</span>
               <ArrowIcon />
-            </a>
+            </Link>
           </div>
 
           <img
@@ -66,12 +67,12 @@ const Home = () => {
                 ₱6,895
               </span>
             </div>
-            <a
-              href="/shop"
+            <Link
+              to="/shop"
               className="btn-ghost border-2 border-secondary rounded-lg inline-flex items-center space-x-2 text-secondary font-semibold px-4 hover:border-secondary"
             >
               <span>BUY NOW</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

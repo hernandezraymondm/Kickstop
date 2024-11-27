@@ -67,6 +67,7 @@ const Cart = () => {
             <img
               src={item.image}
               alt={item.name}
+              loading="lazy"
               className="rounded-md mb-4 w-full h-64 object-cover"
             />
             <h2 className="text-lg font-bold mb-2">{item.name}</h2>
