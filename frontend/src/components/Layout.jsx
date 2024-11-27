@@ -31,7 +31,11 @@ const Layout = () => {
         </aside>
       )}
 
-      <main className="col-span-2 lg:col-span-1">
+      <main
+        className={`col-span-2 ${
+          isAdminRoute ? 'lg:col-span-2' : 'lg:col-span-1'
+        }`}
+      >
         <Outlet />
       </main>
 
