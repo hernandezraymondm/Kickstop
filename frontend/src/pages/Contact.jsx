@@ -72,7 +72,7 @@ const Contact = () => {
             <LocationIcon />
             <span>
               <p>Address</p>
-              <p className="font-medium">rayhernandez.dev@gmail.com</p>
+              <p className="font-medium">Cavite, Philippines</p>
             </span>
           </div>
           <div className="flex items-center gap-3">

@@ -29,9 +29,11 @@ const Home = () => {
       >
         <div className="hero-content relative mx-auto w-full grid lg:grid-cols-2">
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl mt-5 md:text-5xl font-semibold mb-4 block text-accent">
+            <h1 className="mt-5 mb-4 text-4xl md:text-5xl font-semibold block text-accent leading-tight">
               Discover the Latest
-              <strong className="block md:text-6xl">Shoes Collection</strong>
+              <strong className="block text-4xl md:text-6xl mt-2">
+                Shoes Collection
+              </strong>
             </h1>
             <p className="mx-auto text-lg lg:mx-0 md:text-xl md:max-w-[46ch] text-accent-content mb-4">
               Step into the season with our latest styles. Discover unparalleled
@@ -39,6 +41,7 @@ const Home = () => {
               the next level. Elevate your wardrobe with the perfect blend of
               fashion and functionality, designed for the modern lifestyle.
             </p>
+
             <a
               href="/shop"
               className="btn btn-secondary inline-flex items-center space-x-2 text-white font-semibold"
@@ -57,8 +60,8 @@ const Home = () => {
             <h1 className="font-bold text-xl text-accent-content">
               NIKE AIR JORDAN I
             </h1>
-            <div>
-              <Rating />
+            <div className="flex items-center">
+              <Rating rating={4.5} />
               <span className="text-accent font-bold px-2 ml-2 border-l-2 border-gray-400">
                 ₱6,895
               </span>

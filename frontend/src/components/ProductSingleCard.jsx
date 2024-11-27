@@ -23,6 +23,7 @@ const ProductSingleCard = ({ product }) => {
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
           className="w-full h-[250px] object-cover object-center"
         />
       </figure>
@@ -40,8 +41,8 @@ const ProductSingleCard = ({ product }) => {
           )}
         </h2>
         <p>{product.description || 'No description available.'}</p>
-        <div>
-          <Rating />
+        <div className="flex items-center">
+          <Rating rating={3.5} />
           <span className="price text-secondary font-bold px-2 ml-2 border-l-2 border-gray-400">
             ₱{product.priceInCents.toFixed(2)}
           </span>

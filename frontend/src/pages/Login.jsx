@@ -103,15 +103,13 @@ const Login = () => {
           Log In
         </button>
       </form>
-      <div>
-        <p className="mt-4 inline-block">Don't have an account?</p>
-        <Link
-          to="/register"
-          className="text-orange-600 hover:text-orange-700 text-xl font-medium ml-2"
-        >
-          Register
-        </Link>
-      </div>
+      <p className="mt-4">Don't have an account?</p>
+      <Link
+        to="/register"
+        className="text-orange-600 hover:text-orange-700 text-xl font-medium ml-2"
+      >
+        Register
+      </Link>
     </div>
   );
 };

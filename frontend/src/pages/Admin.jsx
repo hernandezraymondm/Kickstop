@@ -54,7 +54,11 @@ const Admin = () => {
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <img src={product.image} alt={product.title} />
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 </td>

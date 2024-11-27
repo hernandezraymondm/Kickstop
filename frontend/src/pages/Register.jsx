@@ -57,8 +57,11 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-test-100">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+    <div
+      className="flex flex-col items-center justify-start py-40 min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
+      style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
+    >
+      <h2 className="text-2xl font-bold mb-10">Register</h2>
 
       {statusMessage && (
         <p
@@ -70,7 +73,10 @@ const Register = () => {
         </p>
       )}
 
-      <form className="w-full max-w-xs" onSubmit={submitHandler}>
+      <form
+        className="w-full max-w-xs flex flex-col gap-4"
+        onSubmit={submitHandler}
+      >
         <input
           type="text"
           placeholder="Username"
@@ -107,14 +113,17 @@ const Register = () => {
 
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-md w-full"
+          className="btn bg-orange-600 hover:bg-orange-700 font-semibold text-white rounded-lg py-2 px-4 w-full"
         >
           Register
         </button>
       </form>
 
-      <p className="mt-4">Existing/Created Account?</p>
-      <Link to="/login" className="text-blue-500 hover:text-blue-800 text-xl">
+      <p className="mt-4">Already have an account?</p>
+      <Link
+        to="/login"
+        className="text-orange-600 hover:text-orange-700 text-xl font-medium ml-2"
+      >
         Sign In
       </Link>
     </div>
