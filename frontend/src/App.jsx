@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import About from './pages/About';
 import Layout from './components/Layout';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             }
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

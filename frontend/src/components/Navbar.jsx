@@ -21,10 +21,7 @@ const Navbar = ({ toggleSidebar }) => {
           className="btn-ghost rounded-lg hidden md:flex"
           onClick={toggleSidebar}
         >
-          <svg
-            viewBox="0 0 32 32"
-            className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
-          >
+          <svg viewBox="0 0 32 32" className="h-12">
             <path
               className="line line-top-bottom"
               d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
@@ -45,7 +42,7 @@ const Navbar = ({ toggleSidebar }) => {
         </button>
 
         {/* Logo Icon */}
-        <a href="/" className="btn btn-ghost text-xl flex items-center">
+        <Link to="/" className="btn btn-ghost text-xl flex items-center">
           <img
             src="/assets/images/Logo.png"
             width="40"
@@ -55,7 +52,7 @@ const Navbar = ({ toggleSidebar }) => {
           <h1 className="text-4xl font-bold uppercase hidden xl:flex">
             <span className="text-secondary">K</span>ickstop
           </h1>
-        </a>
+        </Link>
       </div>
 
       {/* Links */}
@@ -88,7 +85,7 @@ const Navbar = ({ toggleSidebar }) => {
 
       {/* Icons */}
       <div className="navbar-end sm:gap-5">
-        <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Liked">
+        <Link to="/liked" className="tooltip tooltip-bottom" data-tip="Liked">
           <HeartIcon />
         </Link>
         <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Cart">
