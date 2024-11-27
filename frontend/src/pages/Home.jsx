@@ -25,6 +25,7 @@ const Home = () => {
   return (
     <>
       <section
+        id="featured"
         className="section hero bg-cover bg-no-repeat bg-center py-2 lg:px-[62px] mb-5 mx-auto font-nunito"
         style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
       >

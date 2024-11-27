@@ -22,7 +22,7 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-[auto_1fr]">
-      <header id="featured" className="col-span-2">
+      <header className="col-span-2">
         {isAdminRoute ? (
           <AdminNavbar />
         ) : (

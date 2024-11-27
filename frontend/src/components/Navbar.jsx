@@ -14,7 +14,7 @@ const Navbar = ({ toggleSidebar }) => {
       : '';
 
   return (
-    <div className="navbar mx-auto text-accent-content">
+    <div id="featured" className="navbar mx-auto text-accent-content">
       <div className="navbar-start xl:gap-4">
         {/* Hamburger Menu - only shows on homepage */}
         {location.pathname === '/' && (
