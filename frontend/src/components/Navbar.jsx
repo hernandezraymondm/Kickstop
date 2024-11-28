@@ -19,7 +19,7 @@ const Navbar = ({ toggleSidebar }) => {
         {/* Hamburger Menu - only shows on homepage */}
         {location.pathname === '/' && (
           <button
-            className="btn-ghost rounded-lg hidden md:flex"
+            className="btn-ghost rounded-lg hidden md:flex fixed"
             onClick={toggleSidebar}
           >
             <svg viewBox="0 0 32 32" className="h-12">
@@ -44,7 +44,10 @@ const Navbar = ({ toggleSidebar }) => {
         )}
 
         {/* Logo Icon */}
-        <Link to="/" className="btn btn-ghost text-xl flex items-center">
+        <Link
+          to="/"
+          className="btn btn-ghost text-xl flex items-center md:ml-14"
+        >
           <img
             src="/assets/images/Logo.png"
             width="40"
