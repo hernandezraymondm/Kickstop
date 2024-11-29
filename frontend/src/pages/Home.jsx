@@ -3,24 +3,28 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ArrowIcon from '../components/Icon/ArrowIcon';
-import Rating from '../components/rating/Rating';
+import Rating from '../components/Rating/Rating';
 import CollectionCard from '../components/CollectionCard';
 
 const Home = () => {
   const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
       .then((response) => {
         setProduct(response.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, []);
 
-  const latestProducts = product.slice(0, 9);
+  const latestProducts = product.slice(0, 24);
 
   return (
     <>
@@ -199,7 +203,7 @@ const Home = () => {
         <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
           <div className="divider uppercase my-10">Bestsellers</div>
         </h1>
-        <ProductCard product={latestProducts} />
+        <ProductCard product={latestProducts} loading={loading} cards={24} />
       </section>
     </>
   );

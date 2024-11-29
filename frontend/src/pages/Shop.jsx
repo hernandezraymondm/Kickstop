@@ -6,16 +6,20 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState('');
   const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
       .then((response) => {
         setProduct(response.data.data);
         setFilteredProducts(response.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, []);
 
@@ -58,7 +62,7 @@ const Shop = () => {
           </select>
         </div>
       </div>
-      <ProductCard product={filteredProducts} />
+      <ProductCard product={filteredProducts} loading={loading} cards={24} />
     </div>
   );
 };
