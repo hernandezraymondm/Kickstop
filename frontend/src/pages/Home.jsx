@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ArrowIcon from '../components/Icon/ArrowIcon';
-import Rating from '../components/Rating/Rating';
+import Rating from '../components/Ratings/Rating';
 import CollectionCard from '../components/CollectionCard';
 
 const Home = () => {
