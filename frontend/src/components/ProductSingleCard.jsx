@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import Rating from './Ratings/Rating';
+import Rating from './Rating/Rating';
 
 const ProductSingleCard = ({ product }) => {
   const { addToCart, removeFromCart, cartItems } = useCart();

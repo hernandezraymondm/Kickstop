@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ArrowIcon from '../components/Icon/ArrowIcon';
-import Rating from '../components/Ratings/Rating';
+import Rating from '../components/Rating/Rating';
 import CollectionCard from '../components/CollectionCard';
 
 const Home = () => {
@@ -82,97 +82,83 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section service lg:px-[62px]">
-        <div className="container mx-auto max-w-[1470px]">
-          <ul className="service-list flex flex-wrap justify-evenly">
-            <li className="service-item p-4">
-              <div className="service-card flex items-center space-x-4 bg-transparent  p-6">
-                <div className="card-icon">
-                  <img
-                    src="./assets/images/service-1.png"
-                    width="53"
-                    height="28"
-                    loading="lazy"
-                    alt="Service icon"
-                  />
-                </div>
+      <section className="lg:px-[62px]">
+        <div className="mx-auto max-w-[1470px]">
+          <ul className="flex flex-wrap justify-evenly">
+            <li className="p-4">
+              <div className="flex items-center space-x-4 bg-transparent  p-6">
+                <img
+                  src="./assets/images/service-1.png"
+                  width="53"
+                  height="28"
+                  alt="Free Shipping"
+                />
 
                 <div>
-                  <h3 className="h4 card-title text-lg text-accent-content font-semibold">
+                  <h3 className="h4 text-lg text-accent-content font-semibold">
                     Free Shipping
                   </h3>
 
-                  <p className="card-text text-gray-500">
+                  <p className="text-gray-500">
                     All orders over <span>₱3,000</span>
                   </p>
                 </div>
               </div>
             </li>
 
-            <li className="service-item p-4">
-              <div className="service-card flex items-center space-x-4 bg-transparent  p-6">
-                <div className="card-icon">
-                  <img
-                    src="./assets/images/service-2.png"
-                    width="43"
-                    height="35"
-                    loading="lazy"
-                    alt="Service icon"
-                  />
-                </div>
+            <li className="p-4">
+              <div className="flex items-center space-x-4 bg-transparent  p-6">
+                <img
+                  src="./assets/images/service-2.png"
+                  width="43"
+                  height="35"
+                  alt="Quick Payment"
+                />
 
                 <div>
-                  <h3 className="h4 card-title text-lg text-accent-content font-semibold">
+                  <h3 className="h4 text-lg text-accent-content font-semibold">
                     Quick Payment
                   </h3>
 
-                  <p className="card-text text-gray-500">100% secure payment</p>
+                  <p className="text-gray-500">100% secure payment</p>
                 </div>
               </div>
             </li>
 
-            <li className="service-item p-4">
-              <div className="service-card flex items-center space-x-4 bg-transparent  p-6">
-                <div className="card-icon">
-                  <img
-                    src="./assets/images/service-3.png"
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    alt="Service icon"
-                  />
-                </div>
+            <li className="p-4">
+              <div className="flex items-center space-x-4 bg-transparent  p-6">
+                <img
+                  src="./assets/images/service-3.png"
+                  width="40"
+                  height="40"
+                  alt="Free Returns"
+                />
 
                 <div>
-                  <h3 className="h4 card-title text-lg text-accent-content font-semibold">
+                  <h3 className="h4 text-lg text-accent-content font-semibold">
                     Free Returns
                   </h3>
 
-                  <p className="card-text text-gray-500">
-                    Money back in 30 days
-                  </p>
+                  <p className="text-gray-500">Money back in 30 days</p>
                 </div>
               </div>
             </li>
 
-            <li className="service-item p-4">
-              <div className="service-card flex items-center space-x-4 bg-transparent  p-6">
-                <div className="card-icon">
-                  <img
-                    src="./assets/images/service-4.png"
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    alt="Service icon"
-                  />
-                </div>
+            <li className="p-4">
+              <div className="flex items-center space-x-4 bg-transparent  p-6">
+                <img
+                  src="./assets/images/service-4.png"
+                  width="40"
+                  height="40"
+                  alt="24/7 Support"
+                />
 
                 <div>
-                  <h3 className="h4 card-title text-lg text-accent-content font-semibold">
+                  <h3 className="h4 text-lg text-accent-content font-semibold">
                     24/7 Support
                   </h3>
 
-                  <p className="card-text text-gray-500">Get Quick Support</p>
+                  <p className="text-gray-500">Get Quick Support</p>
                 </div>
               </div>
             </li>
