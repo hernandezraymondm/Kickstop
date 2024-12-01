@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import AdminNavbar from './AdminNavbar';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
-import Footer from './Footer';
+import Footer from './components/Footer/Footer';
+import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
 
 const Layout = () => {
   const location = useLocation();
@@ -16,18 +15,15 @@ const Layout = () => {
     setIsOpen(isHome);
   }, [isHome]);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  // Scroll to top on every route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
-    <div className="min-h-screen grid grid-cols-[auto_1fr]">
-      <header className="col-span-2">
-        {isAdminRoute ? (
-          <AdminNavbar />
-        ) : (
-          <Navbar toggleSidebar={toggleSidebar} />
-        )}
+    <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-clip">
+      <header className="max-h-16 col-span-2 z-20 sticky top-0 backdrop-blur-lg shadow-sm lg:px-2 xl:px-[60px] ">
+        <Navbar />
       </header>
 
       {isHome && (

@@ -6,47 +6,29 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@media (min-width: 530px) {
+  .sidebar-menu {
+    width: 350px;
   }
 }
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+/* ===========
+Scroll bar 
+============*/
+
+/* Light mode */
+[data-theme='light'] {
+  --bg-primary: #afafaf;
+  --border-color: #dddddd;
 }
 
-.hamburger {
-  cursor: pointer;
+/* Dark mode */
+[data-theme='dark'] {
+  --bg-primary: #4a5568;
+  --border-color: #121822;
 }
 
-.hamburger div {
-  display: none;
-}
-
-.hamburger svg {
-  height: 3em;
-  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3;
-  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-top-bottom {
-  stroke-dasharray: 12 63;
-}
-
-details[open] .hamburger svg {
-  transform: rotate(-45deg);
-}
-
-details[open] .hamburger .line-top-bottom {
-  stroke-dasharray: 20 300;
-  stroke-dashoffset: -32.42;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-primary) var(--border-color);
 }

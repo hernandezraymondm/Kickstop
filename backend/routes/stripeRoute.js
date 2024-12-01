@@ -14,7 +14,7 @@ router.post('/create-checkout-session', async (req, res) => {
 
   const lineItems = products.map((product) => ({
     price_data: {
-      currency: 'usd',
+      currency: 'PHP',
       product_data: {
         name: product.name,
         images: [product.image],
@@ -56,16 +56,16 @@ router.get('/api/stats', async (req, res) => {
 
     console.log('Balance Object:', JSON.stringify(balance, null, 2));
 
-    const availableBalanceUSD = balance.available.find(
-      (b) => b.currency === 'usd'
+    const availableBalancePHP = balance.available.find(
+      (b) => b.currency === 'PHP'
     );
-    const pendingBalanceUSD = balance.pending.find((b) => b.currency === 'usd');
+    const pendingBalancePHP = balance.pending.find((b) => b.currency === 'PHP');
 
-    const availableBalance = availableBalanceUSD
-      ? availableBalanceUSD.amount / 100
+    const availableBalance = availableBalancePHP
+      ? availableBalancePHP.amount / 100
       : 0;
-    const pendingBalance = pendingBalanceUSD
-      ? pendingBalanceUSD.amount / 100
+    const pendingBalance = pendingBalancePHP
+      ? pendingBalancePHP.amount / 100
       : 0;
 
     const charges = await stripe.charges.list({ limit: 100 });

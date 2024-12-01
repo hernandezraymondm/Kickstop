@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Spinner from '../components/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const DeleteProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ const DeleteProduct = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('NotAToken');
 
   const config = {
     headers: {
@@ -34,14 +34,15 @@ const DeleteProduct = () => {
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar('Error', { variant: 'error' });
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         console.log(error);
       });
   };
 
   return (
     <div className="p-6 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
       <div className="container max-w-lg shadow-lg p-5">
         <Link
           to="/admin"
@@ -58,7 +59,14 @@ const DeleteProduct = () => {
           className="bg-red-600 hover:bg-red-800  
                                                                 py-2 px-4 rounded-lg w-full"
         >
-          Confirm
+          {loading ? (
+            <div className="flex justify-center items-center gap-2">
+              <p>Deleting</p>
+              <LoadingDots size={'loading-xs'} />
+            </div>
+          ) : (
+            'Confirm'
+          )}
         </button>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const Register = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     password2: '',
@@ -23,7 +24,7 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (userData.password !== userData.password2) {
       setIsSuccess(false);
       setStatusMessage('Passwords do not match');
@@ -40,7 +41,7 @@ const Register = () => {
       await axios.post(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/register`,
         {
-          name: userData.name,
+          username: userData.username,
           email: userData.email,
           password: userData.password,
         },
@@ -48,10 +49,12 @@ const Register = () => {
       );
 
       setIsSuccess(true);
+      setLoading(false);
       setStatusMessage('Registration successful');
-      navigate('/login');
+      navigate('/register/success');
     } catch (error) {
       setIsSuccess(false);
+      setLoading(false);
       setStatusMessage(error.response?.data?.message || 'An error occurred');
     }
   };
@@ -67,12 +70,13 @@ const Register = () => {
         <p
           className={`${
             isSuccess ? 'text-green-500' : 'text-red-500'
-          } text-lg italic mb-4`}
+          } text-xs italic mb-2 w-80 text-center`}
         >
           {statusMessage}
         </p>
       )}
 
+      {loading && <LoadingDots size={'loading-lg'} />}
       <form
         className="w-full max-w-xs flex flex-col gap-4"
         onSubmit={submitHandler}
@@ -80,8 +84,8 @@ const Register = () => {
         <input
           type="text"
           placeholder="Username"
-          name="name"
-          value={userData.name}
+          name="username"
+          value={userData.username}
           onChange={changeInputHandler}
           className="shadow border rounded-md w-full py-2 px-3 text-gray-700"
         />

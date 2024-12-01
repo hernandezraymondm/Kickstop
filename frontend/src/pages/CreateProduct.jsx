@@ -2,24 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import Spinner from '../components/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const CreateProduct = () => {
   const [name, setName] = useState('');
-  const [priceInCents, setPriceInCents] = useState('');
+  const [priceInPesos, setPriceInPesos] = useState('');
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState('');
   const [description, setDescription] = useState('');
   const [img, setImg] = useState(null);
-
   const [imgPreview, setImgPreview] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('NotAToken');
 
   const config = {
     headers: {
@@ -54,7 +52,7 @@ const CreateProduct = () => {
     try {
       const uploadUrl = `${
         import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
-      }/upload-image`;
+      }/upload/image`;
       const res = await axios.post(uploadUrl, data);
 
       const { secure_url } = res.data;
@@ -68,15 +66,15 @@ const CreateProduct = () => {
   };
 
   const handleSaveProduct = async () => {
-    if (!name || !priceInCents || !category || !target) {
+    if (!name || !priceInPesos || !category || !target) {
       enqueueSnackbar('Please fill all required fields', {
         variant: 'warning',
       });
       return;
     }
 
-    const price = parseInt(priceInCents);
-    if (isNaN(price) || price <= 0) {
+    const priceInCents = Math.round(parseFloat(priceInPesos) * 100); // Convert pesos to cents
+    if (isNaN(priceInCents) || priceInCents <= 0) {
       enqueueSnackbar('Price must be a positive number', {
         variant: 'warning',
       });
@@ -122,37 +120,43 @@ const CreateProduct = () => {
 
   return (
     <div className="p-2 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-100">
         <Link
           to="/admin"
-          className="flex justify-center items-center
-        btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
+          className="flex justify-center items-center btn mb-4 w-12 py-2 px-8 text-sm rounded-xl"
         >
           Back
         </Link>
-        <h1 className="text-3xl font-semibold my-4">Create Product</h1>
+        <div className="flex justify-start items-center gap-3">
+          <h1 className="text-3xl font-semibold my-4">Create Product</h1>
+          {loading && (
+            <span className="loading loading-spinner text-secondary" />
+          )}
+        </div>
         <div className="my-4">
           <label htmlFor="name" className="block text-lg mb-2 mt-4">
             Name
           </label>
           <input
             id="name"
+            disabled={loading}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
           />
 
-          <label htmlFor="priceInCents" className="block text-lg mb-2 mt-4">
-            Price
+          <label htmlFor="priceInPesos" className="block text-lg mb-2 mt-4">
+            Price (₱)
           </label>
           <input
-            id="priceInCents"
-            type="number"
-            value={priceInCents}
-            onChange={(e) => setPriceInCents(e.target.value)}
+            id="priceInPesos"
+            disabled={loading}
+            type="text"
+            value={priceInPesos}
+            onChange={(e) => setPriceInPesos(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
+            step="0.01"
           />
 
           <label htmlFor="category" className="block text-lg mb-2 mt-4">
@@ -160,6 +164,7 @@ const CreateProduct = () => {
           </label>
           <select
             id="category"
+            disabled={loading}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -178,6 +183,7 @@ const CreateProduct = () => {
           </label>
           <select
             id="target"
+            disabled={loading}
             value={target}
             onChange={(e) => setTarget(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -197,6 +203,7 @@ const CreateProduct = () => {
           </label>
           <textarea
             id="description"
+            disabled={loading}
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -208,6 +215,7 @@ const CreateProduct = () => {
           </label>
           <input
             id="img"
+            disabled={loading}
             type="file"
             accept="image/*"
             onChange={handleFileChange}
@@ -227,10 +235,18 @@ const CreateProduct = () => {
 
           <button
             onClick={handleSaveProduct}
+            disabled={loading}
             className="w-full bg-green-500
                             hover:bg-green-800 text-white py-2 px-4 rounded-md mt-6"
           >
-            Save
+            {loading ? (
+              <div className="flex justify-center items-center gap-2">
+                <p>Saving</p>
+                <LoadingDots size={'loading-xs'} />
+              </div>
+            ) : (
+              'Save'
+            )}
           </button>
         </div>
       </div>

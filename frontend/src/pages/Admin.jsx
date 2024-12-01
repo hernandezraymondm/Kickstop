@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Stats from '../components/Stats';
+import Stats from '../components/Tally/Stats';
+import TableSkeleton from '../components/Loader/TableSkeleton';
 
 const Admin = () => {
   const [product, setProduct] = useState([]);
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
       .then((response) => {
         setProduct(response.data.data);
-
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        console.log(
+          error.response?.data?.message || 'Failed to fetch products.'
+        );
         setLoading(false);
       });
   }, []);
 
   return (
-    <div className="px-4 py-8 max-w-7xl mx-auto">
+    <div className="px-4 py-3 mb-5 max-w-7xl mx-auto">
       <Stats />
 
       <div className="overflow-x-auto">
@@ -43,12 +44,21 @@ const Admin = () => {
               </th>
               <th>Name</th>
               <th>Price</th>
-              <th>Description</th>
               <th>Category</th>
+              <th>Target</th>
+              <th>Description</th>
             </tr>
           </thead>
 
           <tbody>
+            {loading && <TableSkeleton rows={24} />}
+            {!loading && product.length === 0 && (
+              <tr>
+                <td colSpan="7" className="text-center">
+                  No products available.
+                </td>
+              </tr>
+            )}
             {product.map((product, index) => (
               <tr key={product._id} className="bg-base-100 hover:bg-base-300">
                 <td>
@@ -63,15 +73,16 @@ const Admin = () => {
                   </div>
                 </td>
                 <td className="py-3 px-5">{product.name}</td>
-                <td className="py-3 px-5">{product.priceInCents}</td>
-                <td className="py-3 px-5">{product.description}</td>
+                <td className="py-3 px-5">{product.priceInCents / 100}</td>
                 <td className="py-3 px-5">{product.category}</td>
+                <td className="py-3 px-5">{product.target}</td>
+                <td className="py-3 px-5">{product.description}</td>
                 <td className="py-3 px-5">
                   <div className="flex justify-center gap-x-1">
                     <Link
                       to={`/admin/product/edit/${product._id}`}
                       className="bg-orange-500 hover:bg-orange-900
-                     text-white py-2 px-4 font-medium rounded-l-lg text-sm"
+                    text-white py-2 px-4 font-medium rounded-l-lg text-sm"
                     >
                       Edit
                     </Link>
@@ -79,7 +90,7 @@ const Admin = () => {
                     <Link
                       to={`/admin/product/delete/${product._id}`}
                       className="bg-red-500 hover:bg-red-900
-                     text-white py-2 px-4 font-medium rounded-r-lg text-sm"
+                    text-white py-2 px-4 font-medium rounded-r-lg text-sm"
                     >
                       Delete
                     </Link>

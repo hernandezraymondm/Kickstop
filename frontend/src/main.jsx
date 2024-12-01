@@ -4,14 +4,22 @@ import App from './App.jsx';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { CartProvider } from './context/CartContext.jsx';
+import { CartProvider } from './contexts/CartContext.jsx';
+import { LikeProvider } from './contexts/LikeContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <SnackbarProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </SnackbarProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <CartProvider>
+          <LikeProvider>
+            <App />
+          </LikeProvider>
+        </CartProvider>
+      </SnackbarProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

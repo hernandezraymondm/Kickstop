@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useCart } from '../context/CartContext';
+import { useEffect } from 'react';
+import { useCart } from '../contexts/CartContext';
 
 const Success = () => {
   const { clearCart } = useCart();

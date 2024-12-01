@@ -1,44 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import LoadingDots from '../components/Loader/LoadingDots';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [statusMessage, setStatusMessage] = useState('');
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
   });
 
-  const [statusMessage, setStatusMessage] = useState('');
+  const { login, isLoading, error, isAuthenticated } = useAuth();
 
   const changeInputHandler = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
     if (statusMessage) setStatusMessage('');
   };
 
-  const submitHandler = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/login`,
-        loginData
-      );
-      console.log(response.data);
-
-      localStorage.setItem('token', response.data.token);
-
-      navigate('/admin');
-    } catch (error) {
-      if (error.response) {
-        setStatusMessage(error.response.data.message);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log('Error', error.message);
-      }
-    }
+    await login(loginData);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/admin');
+    }
+  }, [isAuthenticated]);
 
   return (
     <div
@@ -46,13 +35,15 @@ const Login = () => {
       style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
     >
       <h2 className="text-2xl font-bold mb-10">Log In</h2>
-      {statusMessage && (
-        <p className="text-red-500 text-xs italic mb-2">{statusMessage}</p>
+      {error && (
+        <p className="text-red-500 text-xs italic mb-2 w-80 text-center">
+          {error}
+        </p>
       )}
-
+      {isLoading && <LoadingDots size={'loading-lg'} />}
       <form
         className="w-full max-w-xs flex flex-col gap-4"
-        onSubmit={submitHandler}
+        onSubmit={handleLogin}
       >
         <label className="input input-bordered flex items-center gap-2">
           <svg

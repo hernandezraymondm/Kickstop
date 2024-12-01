@@ -1,77 +1,86 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
+import { generateTokenAndSetCookie } from '../utils/generateTokenAndSetCookie.js';
 
-const router = express.Router();
+// REGISTER
+const register = async (req, res) => {
+  const { username, email, password } = req.body;
 
-//ROUTE FOR REGISTER
-router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const user = await User.register(username, email, password);
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+    res.status(201).json({
+      message: 'User registered successfully',
+    });
+  } catch (error) {
+    console.error('Error during registration:', error);
+
+    // Check error message and classify
+    if (error.message.includes('already in use')) {
+      return res.status(409).json({ message: error.message }); // Conflict
+    } else if (
+      error.message.includes('must be filled') ||
+      error.message.includes('not valid') ||
+      error.message.includes('not strong enough')
+    ) {
+      return res.status(400).json({ message: error.message }); // Bad Request
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    const newUser = new User({
-      email,
-      password: hashedPassword,
-    });
-
-    const savedUser = await newUser.save();
-
-    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
-
-    res.status(201).json({ token, message: 'User registered successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Internal server error' }); // Fallback
   }
-});
+};
 
-//ROUTE FOR LOGIN
-router.post('/login', async (req, res) => {
+// LOGIN
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const user = await User.login(email, password);
+    generateTokenAndSetCookie(res, user._id);
 
-    const user = await User.findOne({ email });
+    res.status(200).json({
+      success: true,
+      message: 'Logged in successfully',
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+
+    // Check error message and classify
+    if (
+      error.message.includes('must be filled') ||
+      error.message.includes('not valid')
+    ) {
+      return res.status(400).json({ message: error.message }); // Bad Request
+    } else if (error.message.includes('Invalid email or password')) {
+      return res.status(401).json({ message: error.message }); // Unauthorized
+    }
+
+    res.status(500).json({ message: 'Internal server error' }); // Fallback
+  }
+};
+
+const logout = async (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ success: true, message: 'Logged out successfully' });
+};
+
+const checkAuth = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password');
     if (!user) {
-      return res.status(400).json({ massage: 'Invalid credentials' });
+      return res
+        .status(400)
+        .json({ success: false, message: 'User not found' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
-      const payload = {
-        id: user._id,
-        email: user.email,
-      };
-
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: 3600 },
-        (error, token) => {
-          if (error) throw error;
-
-          res.json({
-            token,
-            user: { id: user._id, email: user.email },
-          });
-        }
-      );
-    } else {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
+    res.status(200).json({ success: true, user });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+    console.log('Error in checkAuth ', error);
+    res.status(400).json({ success: false, message: error.message });
   }
-});
+};
 
-export { router as authRouter };
+export { register, login, logout, checkAuth };

@@ -48,7 +48,7 @@ const Contact = () => {
 
   return (
     <div
-      className="flex flex-col-reverse lg:flex-row gap-x-10 p-10 md:px-32 lg:p-32 items-start justify-center min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
+      className="flex flex-col-reverse lg:flex-row gap-x-10 px-10 pb-5 md:px-32 lg:p-32 items-start justify-center min-h-screen bg-base-100 hero bg-cover bg-no-repeat bg-center"
       style={{ backgroundImage: "url('/assets/images/hero-banner.png')" }}
     >
       <div className="w-full lg:max-w-[380px] bg-base-100 p-5 sm:p-10 rounded-2xl text-accent-content shadow-xl">

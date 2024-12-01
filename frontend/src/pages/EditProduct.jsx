@@ -2,11 +2,11 @@ import { useSnackbar } from 'notistack';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Spinner from '../components/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const EditProduct = () => {
   const [name, setName] = useState('');
-  const [priceInCents, setPriceInCents] = useState('');
+  const [priceInPesos, setPriceInPesos] = useState(''); // Updated state
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState('');
   const [description, setDescription] = useState('');
@@ -16,7 +16,7 @@ const EditProduct = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('NotAToken');
 
   const config = {
     headers: {
@@ -30,12 +30,12 @@ const EditProduct = () => {
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product/${id}`)
       .then((response) => {
+        setLoading(false);
         setName(response.data.name);
-        setPriceInCents(response.data.priceInCents);
+        setPriceInPesos((response.data.priceInCents / 100).toFixed(2)); // Convert cents to pesos
         setCategory(response.data.category);
         setTarget(response.data.target);
         setDescription(response.data.description);
-        setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
@@ -45,6 +45,7 @@ const EditProduct = () => {
   }, [id]);
 
   const handleEditProduct = () => {
+    const priceInCents = Math.round(parseFloat(priceInPesos) * 100); // Convert pesos to cents
     const data = { name, priceInCents, category, target, description };
     setLoading(true);
     axios
@@ -60,44 +61,52 @@ const EditProduct = () => {
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar('Error', { variant: 'error' });
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         console.log(error);
       });
   };
 
   return (
     <div className="p-6 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
-      <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-200">
+      <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-100">
         <Link
           to="/admin"
-          className="flex justify-center items-center
-            btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
+          className="flex justify-center items-center btn mb-4 w-12 py-2 px-8 text-sm rounded-xl"
         >
           Back
         </Link>
-        <h1 className="text-3xl font-semibold my-4 ">Edit Product</h1>
+        <div className="flex justify-start items-center gap-3">
+          <h1 className="text-3xl font-semibold my-4 ">Edit Product</h1>
+          {loading && (
+            <span className="loading loading-spinner text-secondary" />
+          )}
+        </div>
         <div className="my-4">
           <label htmlFor="name" className="block text-lg mb-2 mt-4">
             Name
           </label>
           <input
             id="name"
+            disabled={loading}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
           />
 
-          <label htmlFor="priceInCents" className="block text-lg mb-2 mt-4">
-            Price
+          <label htmlFor="priceInPesos" className="block text-lg mb-2 mt-4">
+            Price (₱)
           </label>
           <input
-            id="priceInCents"
-            type="number"
-            value={priceInCents}
-            onChange={(e) => setPriceInCents(e.target.value)}
+            id="priceInPesos"
+            disabled={loading}
+            type="text"
+            value={priceInPesos}
+            onChange={(e) => setPriceInPesos(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
+            step="0.01"
           />
 
           <label htmlFor="category" className="block text-lg mb-2 mt-4">
@@ -105,6 +114,7 @@ const EditProduct = () => {
           </label>
           <select
             id="category"
+            disabled={loading}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -123,6 +133,7 @@ const EditProduct = () => {
           </label>
           <select
             id="target"
+            disabled={loading}
             value={target}
             onChange={(e) => setTarget(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -131,7 +142,6 @@ const EditProduct = () => {
             <option value="" disabled>
               Select target
             </option>
-
             <option value="Men">Men</option>
             <option value="Women">Women</option>
             <option value="Kids">Kids</option>
@@ -142,6 +152,7 @@ const EditProduct = () => {
           </label>
           <textarea
             id="description"
+            disabled={loading}
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -150,10 +161,17 @@ const EditProduct = () => {
 
           <button
             onClick={handleEditProduct}
-            className="w-full bg-green-500
-                                hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
+            disabled={loading}
+            className="w-full bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
           >
-            Save Changes
+            {loading && name ? (
+              <div className="flex justify-center items-center gap-2">
+                <p>Saving Changes</p>
+                <LoadingDots size={'loading-xs'} />
+              </div>
+            ) : (
+              'Save Changes'
+            )}
           </button>
         </div>
       </div>

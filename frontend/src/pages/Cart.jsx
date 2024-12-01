@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../contexts/CartContext';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -13,12 +13,12 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="text-3xl text-center my-72">Your cart is empty.</div>
+      <div className="text-3xl text-center my-80">Your cart is empty.</div>
     );
   }
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.priceInCents * item.quantity,
+    (acc, item) => acc + (item.priceInCents / 100) * item.quantity,
     0
   );
 
@@ -55,10 +55,10 @@ const Cart = () => {
   };
 
   return (
-    <div className="p-4 my-16 max-w-[1400px] mx-auto">
+    <div className="p-4 my-4 max-w-[1400px] mx-auto">
       <h2 className="text-2xl font-semibold text-center my-6">Shopping Cart</h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cartItems.map((item, index) => (
           <div
             key={index}
@@ -70,16 +70,26 @@ const Cart = () => {
               loading="lazy"
               className="rounded-md mb-4 w-full h-64 object-cover"
             />
-            <h2 className="text-lg font-bold mb-2">{item.name}</h2>
-            <p className="text-md mb-1">
-              Price: ₱{item.priceInCents.toFixed(2)}
+            <p className="text-xs text-gray-500">
+              {item.target} / {item.category}
             </p>
+            <h2 className="font-bold text-lg text-accent truncate">
+              {item.name}
+            </h2>
+            <div className="flex items-center flex-wrap tracking-wider">
+              <span className="font-semibold text-base">
+                ₱{Math.floor(item.priceInCents / 100)}
+                <span className="text-sm text-neutral-500">
+                  {((item.priceInCents / 100) % 1).toFixed(2).substring(1)}
+                </span>
+              </span>
+            </div>
             <div className="flex items-center justify-between text-md mb-3">
               <p>Quantity: {item.quantity}</p>
               <div className="flex items-center">
                 <button
                   onClick={() => decreaseCartItemQuantity(item._id)}
-                  className="  font-bold hover:underline"
+                  className="  font-bold hover:underline text-red-500"
                 >
                   Remove
                 </button>

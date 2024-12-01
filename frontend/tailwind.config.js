@@ -1,3 +1,6 @@
+import typography from '@tailwindcss/typography';
+import daisyui from 'daisyui';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -5,13 +8,13 @@ export default {
     extend: {},
   },
   darkMode: 'class',
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [typography, daisyui],
   daisyui: {
     themes: [
       {
         light: {
-          primary: '#fe7e3d',
-          secondary: '#fb4b29',
+          primary: '#FF8000',
+          secondary: '#fa5d0b',
           accent: '#404040',
           'accent-content': '#000000',
           info: '#9dc142',
@@ -19,7 +22,7 @@ export default {
           'base-100': '#E4E9EF',
         },
         dark: {
-          primary: '#fff248',
+          primary: '#FF9A00',
           secondary: '#fb4b29',
           accent: '#ffd6ae',
           'accent-content': '#ffffff',
