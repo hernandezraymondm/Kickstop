@@ -26,7 +26,7 @@ const CardSkeleton = ({ cards }) => {
             <div className="skeleton h-4 w-48" />
           </div>
           <div className="flex justify-end">
-            <div className="skeleton h-12 w-32 mt-1 rounded-lg" />
+            <div className="skeleton h-12 w-28 mt-1 rounded-lg" />
           </div>
         </div>
       </div>
