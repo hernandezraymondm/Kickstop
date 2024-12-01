@@ -27,8 +27,14 @@ const Shop = () => {
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
       .then((response) => {
-        setProduct(response.data.data);
-        setFilteredProducts(response.data.data);
+        const products = response.data.data;
+        setProduct(products);
+        setFilteredProducts(products);
+        const maxProductPrice = Math.max(
+          ...products.map((p) => p.priceInCents)
+        );
+        setMaxPrice(maxProductPrice);
+        setPriceRange([0, maxProductPrice]);
         setLoading(false);
       })
       .catch((error) => {
@@ -104,7 +110,7 @@ const Shop = () => {
       <div className="filters flex flex-col md:flex-row md:items-start justify-center mb-6 space-y-4 md:space-y-0 md:space-x-6">
         <div className="form-control mb-4 md:mb-0">
           <label className="label">
-            <span className="label-text text-lg font-semibold text-gray-700">
+            <span className="label-text text-lg font-semibold text-accent-content">
               Category
             </span>
           </label>
@@ -122,7 +128,7 @@ const Shop = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text text-lg font-semibold text-gray-700">
+            <span className="label-text text-lg font-semibold text-accent-content">
               Target
             </span>
           </label>
@@ -135,7 +141,7 @@ const Shop = () => {
                 onChange={handleTargetChange}
                 className="checkbox checkbox-sm"
               />
-              <span className="text-gray-700">Men</span>
+              <span className="text-accent-content">Men</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -145,7 +151,7 @@ const Shop = () => {
                 onChange={handleTargetChange}
                 className="checkbox checkbox-sm"
               />
-              <span className="text-gray-700">Women</span>
+              <span className="text-accent-content">Women</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -155,14 +161,14 @@ const Shop = () => {
                 onChange={handleTargetChange}
                 className="checkbox checkbox-sm"
               />
-              <span className="text-gray-700">Kids</span>
+              <span className="text-accent-content">Kids</span>
             </label>
           </div>
         </div>
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text text-lg font-semibold text-gray-700">
+            <span className="label-text text-lg font-semibold text-accent-content">
               Rating
             </span>
           </label>
@@ -176,11 +182,11 @@ const Shop = () => {
                   onChange={handleStarsChange}
                   className="checkbox checkbox-sm"
                 />
-                <span className="text-gray-700">
+                <span className="text-accent-content">
                   {[...Array(star)].map((_, i) => (
                     <i
                       key={i}
-                      className="mask mask-star-2 bg-yellow-500 inline-block w-4 h-4"
+                      className="mask mask-star-2 bg-primary inline-block w-4 h-4"
                     ></i>
                   ))}
                 </span>
@@ -191,7 +197,7 @@ const Shop = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text text-lg font-semibold text-gray-700">
+            <span className="label-text text-lg font-semibold text-accent-content">
               Price Range
             </span>
           </label>
@@ -205,7 +211,7 @@ const Shop = () => {
           />
           <div className="flex items-center space-x-3">
             <input
-              type="number"
+              type="text"
               name="minPrice"
               value={minPrice}
               onChange={handleMinPriceChange}
@@ -213,9 +219,9 @@ const Shop = () => {
               min="0"
               max={maxPrice}
             />
-            <span className="text-gray-700">-</span>
+            <span className="text-accent-content">-</span>
             <input
-              type="number"
+              type="text"
               name="maxPrice"
               value={maxPrice}
               onChange={handleMaxPriceChange}
