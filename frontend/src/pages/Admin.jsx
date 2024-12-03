@@ -63,7 +63,7 @@ const Admin = () => {
                   </div>
                 </td>
                 <td className="py-3 px-5">{product.name}</td>
-                <td className="py-3 px-5">{product.priceInCents}</td>
+                <td className="py-3 px-5">{product.priceInCents / 100}</td>
                 <td className="py-3 px-5">{product.description}</td>
                 <td className="py-3 px-5">{product.category}</td>
                 <td className="py-3 px-5">

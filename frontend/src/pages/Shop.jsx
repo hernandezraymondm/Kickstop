@@ -17,8 +17,8 @@ const Shop = () => {
     4: false,
     5: false,
   });
-  const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(10000);
+  const [minPrice, setMinPrice] = useState(0.01);
+  const [maxPrice, setMaxPrice] = useState(100.0); // Adjusted to pesos
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -30,11 +30,9 @@ const Shop = () => {
         const products = response.data.data;
         setProduct(products);
         setFilteredProducts(products);
-        const maxProductPrice = Math.max(
-          ...products.map((p) => p.priceInCents)
-        );
+        const maxProductPrice =
+          Math.max(...products.map((p) => p.priceInCents)) / 100;
         setMaxPrice(maxProductPrice);
-        setMinPrice(0);
         setLoading(false);
       })
       .catch((error) => {
@@ -73,7 +71,8 @@ const Shop = () => {
 
     filtered = filtered.filter(
       (product) =>
-        product.priceInCents >= minPrice && product.priceInCents <= maxPrice
+        product.priceInCents >= minPrice * 100 &&
+        product.priceInCents <= maxPrice * 100
     );
 
     setFilteredProducts(filtered);
@@ -98,11 +97,11 @@ const Shop = () => {
   };
 
   const handleMinPriceChange = (e) => {
-    setMinPrice(parseInt(e.target.value));
+    setMinPrice(parseFloat(e.target.value));
   };
 
   const handleMaxPriceChange = (e) => {
-    setMaxPrice(parseInt(e.target.value));
+    setMaxPrice(parseFloat(e.target.value));
   };
 
   return (
@@ -124,6 +123,7 @@ const Shop = () => {
               className="input input-xs input-bordered w-full"
               min="0"
               max={maxPrice}
+              step="0.01"
             />
             <span className="text-accent-content">-</span>
             <input
@@ -133,6 +133,7 @@ const Shop = () => {
               onChange={handleMaxPriceChange}
               className="input input-xs input-bordered w-full"
               min={minPrice}
+              step="0.01"
             />
           </div>
         </div>

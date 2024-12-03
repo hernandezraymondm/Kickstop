@@ -42,7 +42,7 @@ const ProductSingleCard = ({ product }) => {
         <div className="flex items-center mt-2 flex-wrap">
           <Rating rating={product.rating} />
           <span className="text-secondary font-bold ml-2">
-            ₱{product.priceInCents.toFixed(2)}
+            ₱{(product.priceInCents / 100).toFixed(2)}
           </span>
         </div>
         <div className="mt-4">

@@ -6,14 +6,12 @@ import Spinner from '../components/Spinner';
 
 const CreateProduct = () => {
   const [name, setName] = useState('');
-  const [priceInCents, setPriceInCents] = useState('');
+  const [priceInPesos, setPriceInPesos] = useState(''); // Updated state
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState('');
   const [description, setDescription] = useState('');
   const [img, setImg] = useState(null);
-
   const [imgPreview, setImgPreview] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -68,15 +66,15 @@ const CreateProduct = () => {
   };
 
   const handleSaveProduct = async () => {
-    if (!name || !priceInCents || !category || !target) {
+    if (!name || !priceInPesos || !category || !target) {
       enqueueSnackbar('Please fill all required fields', {
         variant: 'warning',
       });
       return;
     }
 
-    const price = parseInt(priceInCents);
-    if (isNaN(price) || price <= 0) {
+    const priceInCents = Math.round(parseFloat(priceInPesos) * 100); // Convert pesos to cents
+    if (isNaN(priceInCents) || priceInCents <= 0) {
       enqueueSnackbar('Price must be a positive number', {
         variant: 'warning',
       });
@@ -126,8 +124,7 @@ const CreateProduct = () => {
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-100">
         <Link
           to="/admin"
-          className="flex justify-center items-center
-        btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
+          className="flex justify-center items-center btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
         >
           Back
         </Link>
@@ -144,15 +141,16 @@ const CreateProduct = () => {
             className="input input-bordered input-accent w-full px-4 py-2"
           />
 
-          <label htmlFor="priceInCents" className="block text-lg mb-2 mt-4">
-            Price
+          <label htmlFor="priceInPesos" className="block text-lg mb-2 mt-4">
+            Price (₱)
           </label>
           <input
-            id="priceInCents"
-            type="number"
-            value={priceInCents}
-            onChange={(e) => setPriceInCents(e.target.value)}
+            id="priceInPesos"
+            type="text"
+            value={priceInPesos}
+            onChange={(e) => setPriceInPesos(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
+            step="0.01"
           />
 
           <label htmlFor="category" className="block text-lg mb-2 mt-4">

@@ -18,7 +18,7 @@ const Cart = () => {
   }
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.priceInCents * item.quantity,
+    (acc, item) => acc + (item.priceInCents / 100) * item.quantity,
     0
   );
 
@@ -72,7 +72,7 @@ const Cart = () => {
             />
             <h2 className="text-lg font-bold mb-2">{item.name}</h2>
             <p className="text-md mb-1">
-              Price: ₱{item.priceInCents.toFixed(2)}
+              Price: ₱{(item.priceInCents / 100).toFixed(2)}
             </p>
             <div className="flex items-center justify-between text-md mb-3">
               <p>Quantity: {item.quantity}</p>

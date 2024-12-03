@@ -6,7 +6,7 @@ import Spinner from '../components/Spinner';
 
 const EditProduct = () => {
   const [name, setName] = useState('');
-  const [priceInCents, setPriceInCents] = useState('');
+  const [priceInPesos, setPriceInPesos] = useState(''); // Updated state
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState('');
   const [description, setDescription] = useState('');
@@ -31,7 +31,7 @@ const EditProduct = () => {
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product/${id}`)
       .then((response) => {
         setName(response.data.name);
-        setPriceInCents(response.data.priceInCents);
+        setPriceInPesos((response.data.priceInCents / 100).toFixed(2)); // Convert cents to pesos
         setCategory(response.data.category);
         setTarget(response.data.target);
         setDescription(response.data.description);
@@ -45,6 +45,7 @@ const EditProduct = () => {
   }, [id]);
 
   const handleEditProduct = () => {
+    const priceInCents = Math.round(parseFloat(priceInPesos) * 100); // Convert pesos to cents
     const data = { name, priceInCents, category, target, description };
     setLoading(true);
     axios
@@ -71,8 +72,7 @@ const EditProduct = () => {
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-200">
         <Link
           to="/admin"
-          className="flex justify-center items-center
-            btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
+          className="flex justify-center items-center btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
         >
           Back
         </Link>
@@ -89,15 +89,16 @@ const EditProduct = () => {
             className="input input-bordered input-accent w-full px-4 py-2"
           />
 
-          <label htmlFor="priceInCents" className="block text-lg mb-2 mt-4">
-            Price
+          <label htmlFor="priceInPesos" className="block text-lg mb-2 mt-4">
+            Price (₱)
           </label>
           <input
-            id="priceInCents"
-            type="number"
-            value={priceInCents}
-            onChange={(e) => setPriceInCents(e.target.value)}
+            id="priceInPesos"
+            type="text"
+            value={priceInPesos}
+            onChange={(e) => setPriceInPesos(e.target.value)}
             className="input input-bordered input-accent w-full px-4 py-2"
+            step="0.01"
           />
 
           <label htmlFor="category" className="block text-lg mb-2 mt-4">
@@ -131,7 +132,6 @@ const EditProduct = () => {
             <option value="" disabled>
               Select target
             </option>
-
             <option value="Men">Men</option>
             <option value="Women">Women</option>
             <option value="Kids">Kids</option>
@@ -150,8 +150,7 @@ const EditProduct = () => {
 
           <button
             onClick={handleEditProduct}
-            className="w-full bg-green-500
-                                hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
+            className="w-full bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
           >
             Save Changes
           </button>
