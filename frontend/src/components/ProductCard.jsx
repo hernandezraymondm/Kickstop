@@ -4,7 +4,7 @@ import CardSkeleton from './Skeleton/CardSkeleton';
 
 const ProductCard = ({ product, loading, cards }) => {
   return (
-    <div className="grid lg:grid-cols-2 xl:grid-cols-3 max-w-[1450px] gap-y-7 mx-auto place-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 max-w-[1450px] mx-auto">
       {loading && <CardSkeleton cards={cards} />}
       {Array.isArray(product) &&
         product.map((item) => (

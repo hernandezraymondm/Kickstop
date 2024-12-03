@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CollectionCard = ({ name, background }) => {
   return (
-    <div>
+    <div className="hover:scale-110 transition-transform duration-300">
       <div
         className="section hero w-96 shadow-xl rounded-xl"
         style={{ backgroundImage: `url(${background})` }}

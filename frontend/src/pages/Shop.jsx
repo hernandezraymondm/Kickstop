@@ -34,7 +34,7 @@ const Shop = () => {
           ...products.map((p) => p.priceInCents)
         );
         setMaxPrice(maxProductPrice);
-        setPriceRange([0, maxProductPrice]);
+        setMinPrice(0);
         setLoading(false);
       })
       .catch((error) => {
@@ -106,9 +106,37 @@ const Shop = () => {
   };
 
   return (
-    <div className="p-4 max-w-[1450px] mx-auto mt-16">
-      <div className="filters flex flex-col md:flex-row md:items-start justify-center mb-6 space-y-4 md:space-y-0 md:space-x-6">
-        <div className="form-control mb-4 md:mb-0">
+    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-16">
+      {/* Sidebar Filters */}
+      <div className="filters md:block gap-x-10 gap-y-4 col-span-1 grid grid-cols-2 md:space-y-4 lg:px-5 xl:px-10">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-lg font-semibold text-accent-content">
+              Price Range
+            </span>
+          </label>
+          <div className="flex items-center space-x-3">
+            <input
+              type="text"
+              name="minPrice"
+              value={minPrice}
+              onChange={handleMinPriceChange}
+              className="input input-xs input-bordered w-full"
+              min="0"
+              max={maxPrice}
+            />
+            <span className="text-accent-content">-</span>
+            <input
+              type="text"
+              name="maxPrice"
+              value={maxPrice}
+              onChange={handleMaxPriceChange}
+              className="input input-xs input-bordered w-full"
+              min={minPrice}
+            />
+          </div>
+        </div>
+        <div className="form-control">
           <label className="label">
             <span className="label-text text-lg font-semibold text-accent-content">
               Category
@@ -117,7 +145,7 @@ const Shop = () => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="select select-xs select-bordered w-48 max-w-xs"
+            className="select select-xs select-bordered w-full"
           >
             <option value="">All</option>
             <option value="Featured">Featured</option>
@@ -132,7 +160,7 @@ const Shop = () => {
               Target
             </span>
           </label>
-          <div className="flex flex-col md:flex-row md:space-x-4">
+          <div className="flex flex-col space-y-2">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -172,8 +200,8 @@ const Shop = () => {
               Rating
             </span>
           </label>
-          <div className="flex flex-col md:flex-row md:space-x-4">
-            {[1, 2, 3, 4, 5].map((star) => (
+          <div className="flex flex-col space-y-2">
+            {[5, 4, 3, 2, 1].map((star) => (
               <label key={star} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -183,10 +211,12 @@ const Shop = () => {
                   className="checkbox checkbox-sm"
                 />
                 <span className="text-accent-content">
-                  {[...Array(star)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <i
                       key={i}
-                      className="mask mask-star-2 bg-primary inline-block w-4 h-4"
+                      className={`mask mask-star-2 inline-block w-4 h-4 ${
+                        i < star ? 'bg-secondary' : 'bg-gray-300'
+                      }`}
                     ></i>
                   ))}
                 </span>
@@ -194,44 +224,12 @@ const Shop = () => {
             ))}
           </div>
         </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content">
-              Price Range
-            </span>
-          </label>
-          <input
-            type="range"
-            min={minPrice}
-            max="10000"
-            value={maxPrice}
-            onChange={handleMaxPriceChange}
-            className="range range-xs range-primary w-48 mb-2"
-          />
-          <div className="flex items-center space-x-3">
-            <input
-              type="text"
-              name="minPrice"
-              value={minPrice}
-              onChange={handleMinPriceChange}
-              className="input input-xs input-bordered w-20"
-              min="0"
-              max={maxPrice}
-            />
-            <span className="text-accent-content">-</span>
-            <input
-              type="text"
-              name="maxPrice"
-              value={maxPrice}
-              onChange={handleMaxPriceChange}
-              className="input input-xs input-bordered w-20"
-              min={minPrice}
-            />
-          </div>
-        </div>
       </div>
-      <ProductCard product={filteredProducts} loading={loading} cards={24} />
+
+      {/* Product Cards */}
+      <div className="col-span-3">
+        <ProductCard product={filteredProducts} loading={loading} cards={24} />
+      </div>
     </div>
   );
 };
