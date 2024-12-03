@@ -24,7 +24,7 @@ const ProductSingleCard = ({ product }) => {
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-64 object-cover object-center "
+          className="w-full h-52 object-cover object-center "
         />
         {product.category === 'Featured' && (
           <div className="badge badge-info absolute top-2 left-2">NEW</div>

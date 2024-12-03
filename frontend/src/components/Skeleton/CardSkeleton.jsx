@@ -4,9 +4,12 @@ const CardSkeleton = ({ cards }) => {
   return Array(cards)
     .fill(0)
     .map((_, index) => (
-      <div key={index} className="card-compact w-80 mb-5 shadow-xl rounded-xl">
-        <div className="skeleton h-[250px] w-full rounded-b-none ">
-          <div className="h-full flex justify-center items-center animate-pulse rounded-t-xl">
+      <div
+        key={index}
+        className="hover:scale-110 transition-transform duration-300 bg-base-100 shadow-xl rounded-xl overflow-hidden mb-5"
+      >
+        <div className="skeleton w-full h-52 rounded-t-lg rounded-b-none animate-pulse">
+          <div className="h-full flex justify-center items-center">
             <svg
               className="w-20 h-20 text-gray-200 dark:text-gray-600"
               aria-hidden="true"
@@ -18,15 +21,16 @@ const CardSkeleton = ({ cards }) => {
             </svg>
           </div>
         </div>
-        <div className="card-body bg-base-200 rounded-b-xl">
+        <div className="card-body bg-base-200 rounded-b-xl p-4">
           <div className="skeleton h-3 w-32 mt-1" />
-          <div className="skeleton h-5 w-full mt-3" />
-          <div className="skeleton h-3 w-full mt-3" />
-          <div className="flex items-center mt-1">
-            <div className="skeleton h-4 w-48" />
+          <div className="skeleton h-3 w-full mt-[2px]" />
+          <div className="skeleton h-3 w-full mt-[2px]" />
+          <div className="flex items-center mt-2">
+            <div className="skeleton h-3 w-24" />
+            <div className="skeleton h-3 w-24 ml-2" />
           </div>
-          <div className="flex justify-end">
-            <div className="skeleton h-12 w-28 mt-1 rounded-lg" />
+          <div className="mt-4">
+            <div className="skeleton h-7 w-full rounded-lg" />
           </div>
         </div>
       </div>
