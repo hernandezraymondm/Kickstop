@@ -174,14 +174,17 @@ const Home = () => {
           <CollectionCard
             name="MENS COLLECTION"
             background="/assets/images/collection-1.jpg"
+            target="men"
           />
           <CollectionCard
             name="WOMEN COLLECTION"
             background="/assets/images/collection-2.jpg"
+            target="women"
           />
           <CollectionCard
-            name="SPORTS COLLECTION"
+            name="KIDS COLLECTION"
             background="/assets/images/collection-3.jpg"
+            target="kids"
           />
         </div>
       </section>

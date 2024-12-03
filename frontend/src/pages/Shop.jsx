@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
 const Shop = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const targetFromUrl = queryParams.get('target');
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState({
-    men: false,
-    women: false,
-    kids: false,
+    men: targetFromUrl === 'men',
+    women: targetFromUrl === 'women',
+    kids: targetFromUrl === 'kids',
   });
   const [stars, setStars] = useState({
     1: false,
@@ -211,14 +216,14 @@ const Shop = () => {
                   onChange={handleStarsChange}
                   className="checkbox checkbox-sm"
                 />
-                <span className="text-accent-content">
+                <span className="text-accent-content rating rating-xs lg:rating-sm">
                   {[...Array(5)].map((_, i) => (
-                    <i
+                    <input
                       key={i}
                       className={`mask mask-star-2 inline-block w-4 h-4 ${
                         i < star ? 'bg-secondary' : 'bg-gray-300'
                       }`}
-                    ></i>
+                    ></input>
                   ))}
                 </span>
               </label>
