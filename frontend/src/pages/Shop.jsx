@@ -106,9 +106,9 @@ const Shop = () => {
   };
 
   return (
-    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-16">
+    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-16">
       {/* Sidebar Filters */}
-      <div className="filters md:block gap-x-10 gap-y-4 col-span-1 grid grid-cols-2 md:space-y-4 lg:px-5 xl:px-10">
+      <div className="filters min-w-40 md:block gap-x-10 gap-y-4 col-span-1 grid grid-cols-2 md:space-y-4 pr-4">
         <div className="form-control">
           <label className="label">
             <span className="label-text text-lg font-semibold text-accent-content">
@@ -237,7 +237,7 @@ const Shop = () => {
       </div>
 
       {/* Product Cards */}
-      <div className="col-span-3">
+      <div className="col-span-4">
         <ProductCard product={filteredProducts} loading={loading} cards={24} />
       </div>
     </div>
