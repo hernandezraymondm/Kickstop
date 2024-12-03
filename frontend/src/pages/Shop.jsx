@@ -14,8 +14,6 @@ const Filters = ({
   setMinPrice,
   maxPrice,
   setMaxPrice,
-  setFilteredProducts,
-  setLoading,
 }) => {
   const handleTargetChange = (e) => {
     setTarget({
@@ -40,7 +38,7 @@ const Filters = ({
   };
 
   return (
-    <div className="filters min-w-40 md:block gap-x-10 gap-y-4 grid grid-cols-2 md:space-y-3 pr-4 shadow-lg rounded-xl p-5 bg-base-200">
+    <div className="filters min-w-40 md:block gap-x-10 gap-y-4 grid sm:grid-cols-2 md:space-y-3 pr-4 shadow-lg rounded-xl p-5 bg-base-200">
       <div className="form-control">
         <label className="label">
           <span className="label-text text-lg font-semibold text-accent-content whitespace-nowrap">
@@ -159,7 +157,7 @@ const Filters = ({
                   <input
                     key={i}
                     className={`mask mask-star-2 inline-block w-4 h-4 ${
-                      i < star ? 'bg-secondary' : 'bg-gray-300'
+                      i < star ? 'bg-secondary' : 'bg-neutral-100'
                     }`}
                   ></input>
                 ))}
@@ -286,8 +284,6 @@ const Shop = () => {
             setMinPrice={setMinPrice}
             maxPrice={maxPrice}
             setMaxPrice={setMaxPrice}
-            setFilteredProducts={setFilteredProducts}
-            setLoading={setLoading}
           />
         </div>
       </div>
@@ -304,8 +300,6 @@ const Shop = () => {
           setMinPrice={setMinPrice}
           maxPrice={maxPrice}
           setMaxPrice={setMaxPrice}
-          setFilteredProducts={setFilteredProducts}
-          setLoading={setLoading}
         />
       </div>
       {/* Product Cards */}
