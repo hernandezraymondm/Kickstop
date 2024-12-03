@@ -22,8 +22,8 @@ const Shop = () => {
     4: false,
     5: false,
   });
-  const [minPrice, setMinPrice] = useState(0.01);
-  const [maxPrice, setMaxPrice] = useState(100.0); // Adjusted to pesos
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(100.0);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -115,31 +115,34 @@ const Shop = () => {
       <div className="filters min-w-40 md:block gap-x-10 gap-y-4 col-span-1 grid grid-cols-2 md:space-y-4 pr-4">
         <div className="form-control">
           <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content">
+            <span className="label-text text-lg font-semibold text-accent-content whitespace-nowrap">
               Price Range
             </span>
           </label>
-          <div className="flex items-center space-x-3">
-            <input
-              type="text"
-              name="minPrice"
-              value={minPrice}
-              onChange={handleMinPriceChange}
-              className="input input-xs input-bordered w-full"
-              min="0"
-              max={maxPrice}
-              step="0.01"
-            />
-            <span className="text-accent-content">-</span>
-            <input
-              type="text"
-              name="maxPrice"
-              value={maxPrice}
-              onChange={handleMaxPriceChange}
-              className="input input-xs input-bordered w-full"
-              min={minPrice}
-              step="0.01"
-            />
+          <div className="flex items-center flex-wrap">
+            <label className="label w-full">
+              <span className="label-text text-accent-content mr-3">Min: </span>
+              <input
+                type="text"
+                name="minPrice"
+                value={minPrice}
+                onChange={handleMinPriceChange}
+                className="input input-xs input-bordered w-full min-w-20"
+                min="0"
+                max={maxPrice}
+              />
+            </label>
+            <label className="label w-full">
+              <span className="label-text text-accent-content mr-3">Max: </span>
+              <input
+                type="text"
+                name="maxPrice"
+                value={maxPrice}
+                onChange={handleMaxPriceChange}
+                className="input input-xs input-bordered w-full min-w-20"
+                min={minPrice}
+              />
+            </label>
           </div>
         </div>
         <div className="form-control">
