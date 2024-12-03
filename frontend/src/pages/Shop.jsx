@@ -3,12 +3,189 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/Card/ProductCard';
 
+const Filters = ({
+  category,
+  setCategory,
+  target,
+  setTarget,
+  stars,
+  setStars,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+  setFilteredProducts,
+  setLoading,
+}) => {
+  const handleTargetChange = (e) => {
+    setTarget({
+      ...target,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleStarsChange = (e) => {
+    setStars({
+      ...stars,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleMinPriceChange = (e) => {
+    setMinPrice(parseFloat(e.target.value));
+  };
+
+  const handleMaxPriceChange = (e) => {
+    setMaxPrice(parseFloat(e.target.value));
+  };
+
+  return (
+    <div className="filters min-w-40 md:block gap-x-10 gap-y-4 grid grid-cols-2 md:space-y-3 pr-4 shadow-lg rounded-xl p-5 bg-base-200">
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-lg font-semibold text-accent-content whitespace-nowrap">
+            Price Range, ₱
+          </span>
+        </label>
+        <div className="flex items-center flex-wrap">
+          <label className="label w-full">
+            <span className="label-text text-accent-content mr-3">Min: </span>
+            <input
+              type="text"
+              name="minPrice"
+              value={minPrice}
+              onChange={handleMinPriceChange}
+              className="input input-xs input-bordered w-full min-w-20"
+              min="0"
+              max={maxPrice}
+            />
+          </label>
+          <label className="label w-full">
+            <span className="label-text text-accent-content mr-3">Max: </span>
+            <input
+              type="text"
+              name="maxPrice"
+              value={maxPrice}
+              onChange={handleMaxPriceChange}
+              className="input input-xs input-bordered w-full min-w-20"
+              min={minPrice}
+            />
+          </label>
+        </div>
+      </div>
+
+      <div className="divider hidden md:flex" />
+
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-lg font-semibold text-accent-content">
+            Category
+          </span>
+        </label>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="select select-xs select-bordered w-full"
+        >
+          <option value="">All</option>
+          <option value="Featured">Featured</option>
+          <option value="Sports">Sports</option>
+          <option value="Collection">Collection</option>
+        </select>
+      </div>
+
+      <div className="divider hidden md:flex" />
+
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-lg font-semibold text-accent-content">
+            Target
+          </span>
+        </label>
+        <div className="flex flex-col space-y-2">
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              name="men"
+              checked={target.men}
+              onChange={handleTargetChange}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-accent-content">Men</span>
+          </label>
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              name="women"
+              checked={target.women}
+              onChange={handleTargetChange}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-accent-content">Women</span>
+          </label>
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              name="kids"
+              checked={target.kids}
+              onChange={handleTargetChange}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-accent-content">Kids</span>
+          </label>
+        </div>
+      </div>
+
+      <div className="divider hidden md:flex " />
+
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-lg font-semibold text-accent-content">
+            Rating
+          </span>
+        </label>
+        <div className="flex flex-col space-y-2">
+          {[5, 4, 3, 2, 1].map((star) => (
+            <label key={star} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name={star.toString()}
+                checked={stars[star]}
+                onChange={handleStarsChange}
+                className="checkbox checkbox-sm"
+              />
+              <span className="text-accent-content rating rating-xs lg:rating-sm">
+                {[...Array(5)].map((_, i) => (
+                  <input
+                    key={i}
+                    className={`mask mask-star-2 inline-block w-4 h-4 ${
+                      i < star ? 'bg-secondary' : 'bg-gray-300'
+                    }`}
+                  ></input>
+                ))}
+              </span>
+            </label>
+          ))}
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              name="noReviews"
+              checked={stars['noReviews']}
+              onChange={handleStarsChange}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-accent-content">No Reviews</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Shop = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const targetFromUrl = queryParams.get('target');
-
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState('');
   const [target, setTarget] = useState({
     men: targetFromUrl === 'men',
@@ -25,6 +202,7 @@ const Shop = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100.0);
   const [product, setProduct] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -87,166 +265,51 @@ const Shop = () => {
     filterProducts();
   }, [product, category, target, stars, minPrice, maxPrice]);
 
-  const handleTargetChange = (e) => {
-    setTarget({
-      ...target,
-      [e.target.name]: e.target.checked,
-    });
-  };
-
-  const handleStarsChange = (e) => {
-    setStars({
-      ...stars,
-      [e.target.name]: e.target.checked,
-    });
-  };
-
-  const handleMinPriceChange = (e) => {
-    setMinPrice(parseFloat(e.target.value));
-  };
-
-  const handleMaxPriceChange = (e) => {
-    setMaxPrice(parseFloat(e.target.value));
-  };
-
   return (
-    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-16">
+    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-8 lg:grid-cols-10 gap-y-6 md:gap-3 2xl:gap-10">
       {/* Sidebar Filters */}
-      <div className="filters min-w-40 md:block gap-x-10 gap-y-4 col-span-1 grid grid-cols-2 md:space-y-4 pr-4">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content whitespace-nowrap">
-              Price Range
-            </span>
-          </label>
-          <div className="flex items-center flex-wrap">
-            <label className="label w-full">
-              <span className="label-text text-accent-content mr-3">Min: </span>
-              <input
-                type="text"
-                name="minPrice"
-                value={minPrice}
-                onChange={handleMinPriceChange}
-                className="input input-xs input-bordered w-full min-w-20"
-                min="0"
-                max={maxPrice}
-              />
-            </label>
-            <label className="label w-full">
-              <span className="label-text text-accent-content mr-3">Max: </span>
-              <input
-                type="text"
-                name="maxPrice"
-                value={maxPrice}
-                onChange={handleMaxPriceChange}
-                className="input input-xs input-bordered w-full min-w-20"
-                min={minPrice}
-              />
-            </label>
-          </div>
+      {/* Small Screen Filter*/}
+      <div className="bg-base-200 collapse md:hidden">
+        <input type="checkbox" className="peer" />
+        <div className="collapse-title bg-base-200 font-semibold peer-checked:bg-base-300 text-center">
+          Click here to show/hide filters
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content">
-              Category
-            </span>
-          </label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="select select-xs select-bordered w-full"
-          >
-            <option value="">All</option>
-            <option value="Featured">Featured</option>
-            <option value="Sports">Sports</option>
-            <option value="Collection">Collection</option>
-          </select>
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content">
-              Target
-            </span>
-          </label>
-          <div className="flex flex-col space-y-2">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="men"
-                checked={target.men}
-                onChange={handleTargetChange}
-                className="checkbox checkbox-sm"
-              />
-              <span className="text-accent-content">Men</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="women"
-                checked={target.women}
-                onChange={handleTargetChange}
-                className="checkbox checkbox-sm"
-              />
-              <span className="text-accent-content">Women</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="kids"
-                checked={target.kids}
-                onChange={handleTargetChange}
-                className="checkbox checkbox-sm"
-              />
-              <span className="text-accent-content">Kids</span>
-            </label>
-          </div>
-        </div>
-
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-lg font-semibold text-accent-content">
-              Rating
-            </span>
-          </label>
-          <div className="flex flex-col space-y-2">
-            {[5, 4, 3, 2, 1].map((star) => (
-              <label key={star} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name={star.toString()}
-                  checked={stars[star]}
-                  onChange={handleStarsChange}
-                  className="checkbox checkbox-sm"
-                />
-                <span className="text-accent-content rating rating-xs lg:rating-sm">
-                  {[...Array(5)].map((_, i) => (
-                    <input
-                      key={i}
-                      className={`mask mask-star-2 inline-block w-4 h-4 ${
-                        i < star ? 'bg-secondary' : 'bg-gray-300'
-                      }`}
-                    ></input>
-                  ))}
-                </span>
-              </label>
-            ))}
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="noReviews"
-                checked={stars['noReviews']}
-                onChange={handleStarsChange}
-                className="checkbox checkbox-sm"
-              />
-              <span className="text-accent-content">No Reviews</span>
-            </label>
-          </div>
+        <div className="collapse-content bg-base-200 peer-checked:bg-base-300">
+          <Filters
+            category={category}
+            setCategory={setCategory}
+            target={target}
+            setTarget={setTarget}
+            stars={stars}
+            setStars={setStars}
+            minPrice={minPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            setMaxPrice={setMaxPrice}
+            setFilteredProducts={setFilteredProducts}
+            setLoading={setLoading}
+          />
         </div>
       </div>
-
+      {/* Large Screen Filter */}
+      <div className="hidden md:inline-block col-span-2">
+        <Filters
+          category={category}
+          setCategory={setCategory}
+          target={target}
+          setTarget={setTarget}
+          stars={stars}
+          setStars={setStars}
+          minPrice={minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          setFilteredProducts={setFilteredProducts}
+          setLoading={setLoading}
+        />
+      </div>
       {/* Product Cards */}
-      <div className="col-span-4">
+      <div className="col-span-6 lg:col-span-8">
         <ProductCard product={filteredProducts} loading={loading} cards={24} />
       </div>
     </div>
