@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Stats from '../components/Stats';
+import Stats from '../components/Tally/Stats';
 
 const Admin = () => {
   const [product, setProduct] = useState([]);
@@ -43,8 +43,9 @@ const Admin = () => {
               </th>
               <th>Name</th>
               <th>Price</th>
-              <th>Description</th>
               <th>Category</th>
+              <th>Target</th>
+              <th>Description</th>
             </tr>
           </thead>
 
@@ -64,8 +65,9 @@ const Admin = () => {
                 </td>
                 <td className="py-3 px-5">{product.name}</td>
                 <td className="py-3 px-5">{product.priceInCents / 100}</td>
-                <td className="py-3 px-5">{product.description}</td>
                 <td className="py-3 px-5">{product.category}</td>
+                <td className="py-3 px-5">{product.target}</td>
+                <td className="py-3 px-5">{product.description}</td>
                 <td className="py-3 px-5">
                   <div className="flex justify-center gap-x-1">
                     <Link

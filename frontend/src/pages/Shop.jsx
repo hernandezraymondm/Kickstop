@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/Card/ProductCard';
 
 const Shop = () => {
   const location = useLocation();

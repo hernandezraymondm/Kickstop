@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowIcon from './Icon/ArrowIcon';
+import ArrowIcon from '../Icon/ArrowIcon';
 import { Link } from 'react-router-dom';
 
 const CollectionCard = ({ name, background, target }) => {

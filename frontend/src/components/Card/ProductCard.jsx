@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductSingleCard from './ProductSingleCard';
-import CardSkeleton from './Skeleton/CardSkeleton';
+import CardSkeleton from '../Loader/CardSkeleton';
 
 const ProductCard = ({ product, loading, cards }) => {
   return (

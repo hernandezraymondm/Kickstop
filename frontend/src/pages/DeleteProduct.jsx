@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/Loader/Spinner';
 
 const DeleteProduct = () => {
   const [loading, setLoading] = useState(false);

@@ -70,8 +70,13 @@ const Cart = () => {
               loading="lazy"
               className="rounded-md mb-4 w-full h-64 object-cover"
             />
-            <h2 className="text-lg font-bold mb-2">{item.name}</h2>
-            <p className="text-md mb-1">
+            <p className="text-xs text-gray-500">
+              {item.target} / {item.category}
+            </p>
+            <h2 className="font-bold text-lg text-accent truncate">
+              {item.name}
+            </h2>
+            <p className="text-md font-semibold mb-1">
               Price: ₱{(item.priceInCents / 100).toFixed(2)}
             </p>
             <div className="flex items-center justify-between text-md mb-3">
@@ -79,7 +84,7 @@ const Cart = () => {
               <div className="flex items-center">
                 <button
                   onClick={() => decreaseCartItemQuantity(item._id)}
-                  className="  font-bold hover:underline"
+                  className="  font-bold hover:underline text-red-500"
                 >
                   Remove
                 </button>

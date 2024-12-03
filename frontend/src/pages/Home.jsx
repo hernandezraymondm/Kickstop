@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import ProductCard from '../components/ProductCard';
 import ArrowIcon from '../components/Icon/ArrowIcon';
 import Rating from '../components/Rating/Rating';
-import CollectionCard from '../components/CollectionCard';
+import CollectionCard from '../components/Card/CollectionCard';
+import ProductCard from '../components/Card/ProductCard';
 
 const Home = () => {
   const [product, setProduct] = useState([]);

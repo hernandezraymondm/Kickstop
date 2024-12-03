@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import ThemeToggleButton from './ThemeToggleButton';
-import CartIcon from './Icon/CartIcon';
-import UserIcon from './Icon/UserIcon';
-import HeartIcon from './Icon/HeartIcon';
+import ThemeToggleButton from '../Button/ThemeToggleButton';
+import CartIcon from '../Icon/CartIcon';
+import UserIcon from '../Icon/UserIcon';
+import HeartIcon from '../Icon/HeartIcon';
 
-const Navbar = ({ toggleSidebar }) => {
+const AdminNavbar = () => {
+  const logout = () => {
+    localStorage.removeItem('token');
+  };
+
   const location = useLocation();
 
   const getLinkClass = (path) =>
@@ -24,7 +28,6 @@ const Navbar = ({ toggleSidebar }) => {
           className={`${
             isHome && 'btn-ghost cursor-pointer'
           } cursor-default rounded-lg hidden md:flex fixed`}
-          onClick={toggleSidebar}
         >
           <svg viewBox="0 0 32 32" className="h-12">
             <path
@@ -150,9 +153,14 @@ const Navbar = ({ toggleSidebar }) => {
             </li>
           </ul>
         </details>
+        <div className="navbar-center flex">
+          <Link to={'/'} onClick={logout} className="btn">
+            Logout
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

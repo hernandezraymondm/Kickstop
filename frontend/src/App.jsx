@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoutes';
+import Layout from './Layout';
 import Admin from './pages/Admin';
 import EditProduct from './pages/EditProduct';
 import DeleteProduct from './pages/DeleteProduct';
@@ -14,8 +14,8 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import About from './pages/About';
-import Layout from './components/Layout';
 import NotFound from './pages/NotFound';
+import ProtectedRoute from './routes/ProtectedRoutes';
 
 function App() {
   return (

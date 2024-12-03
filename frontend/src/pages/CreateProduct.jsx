@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/Loader/Spinner';
 
 const CreateProduct = () => {
   const [name, setName] = useState('');
