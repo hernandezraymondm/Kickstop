@@ -222,6 +222,16 @@ const Shop = () => {
                 </span>
               </label>
             ))}
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="noReviews"
+                checked={stars['noReviews']}
+                onChange={handleStarsChange}
+                className="checkbox checkbox-sm"
+              />
+              <span className="text-accent-content">No Reviews</span>
+            </label>
           </div>
         </div>
       </div>

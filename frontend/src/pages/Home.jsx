@@ -185,7 +185,7 @@ const Home = () => {
           />
         </div>
       </section>
-      <section id="bestsellers" className="lg:px-28">
+      <section id="bestsellers" className="md:px-28">
         <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
           <div className="divider uppercase my-10">Bestsellers</div>
         </h1>
