@@ -69,17 +69,18 @@ const ProductSingleCard = ({ product }) => {
         <p className="text-xs text-gray-500">
           {product.target} / {product.category}
         </p>
-        <h2 className="font-bold text-accent truncate">{product.name}</h2>
-        <p className="text-sm text-gray-700">
+        <h2 className="font-semibold sm:font-bold text-sm sm:text-base text-accent truncate">
+          {product.name}
+        </h2>
+        <p className="text-gray-700 text-xs sm:text-sm">
           {product.description || 'No description available.'}
         </p>
-        <div className="flex items-center mt-2 flex-wrap">
-          <Rating rating={product.rating} />
-          <span className="text-secondary font-bold ml-2">
+        <div className="flex items-center flex-wrap">
+          <span className="text-secondary font-semibold">
             ₱{(product.priceInCents / 100).toFixed(2)}
           </span>
         </div>
-        <div className="mt-4">
+        <div className="mt-2">
           {quantity > 0 ? (
             <button
               className="btn btn-error btn-sm w-full"
