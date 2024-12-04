@@ -35,7 +35,7 @@ const Stats = () => {
   }, []);
 
   const formatCurrency = (value) => {
-    return `$${value.toLocaleString('en-US', {
+    return `₱${value.toLocaleString('en-US', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     })}`;

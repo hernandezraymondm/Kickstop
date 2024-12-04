@@ -123,7 +123,7 @@ const CreateProduct = () => {
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-100">
         <Link
           to="/admin"
-          className="flex justify-center items-center btn mb-4 w-12 py-2 px-4 text-sm rounded-xl"
+          className="flex justify-center items-center btn mb-4 w-12 py-2 px-8 text-sm rounded-xl"
         >
           Back
         </Link>

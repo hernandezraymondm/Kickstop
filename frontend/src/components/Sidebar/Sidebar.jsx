@@ -53,7 +53,7 @@ const Sidebar = ({ isOpen }) => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mb-3">
             {/* Icons at the Bottom */}
             <div className="btn btn-ghost">
               <a>

@@ -38,11 +38,11 @@ const ProductSingleCard = ({ product }) => {
           className="w-full h-52 object-cover object-center"
         />
         {product.category === 'Featured' && (
-          <div className="badge badge-info absolute top-2 left-2">NEW</div>
+          <div className="badge badge-info absolute top-2 right-2">NEW</div>
         )}
 
         <button
-          className="absolute top-2 right-2 p-1"
+          className="absolute top-2 left-2"
           onClick={handleToggleLike}
           aria-label={
             itemInLiked ? 'Remove from liked items' : 'Add to liked items'
