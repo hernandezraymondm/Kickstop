@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Stats from '../components/Tally/Stats';
+import TableSkeleton from '../components/Loader/TableSkeleton';
 
 const Admin = () => {
   const [product, setProduct] = useState([]);
@@ -50,6 +51,7 @@ const Admin = () => {
           </thead>
 
           <tbody>
+            {loading && <TableSkeleton rows={24} />}
             {product.map((product, index) => (
               <tr key={product._id} className="bg-base-100 hover:bg-base-300">
                 <td>
