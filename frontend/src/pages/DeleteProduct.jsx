@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Spinner from '../components/Loader/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const DeleteProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -41,7 +41,6 @@ const DeleteProduct = () => {
 
   return (
     <div className="p-6 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
       <div className="container max-w-lg shadow-lg p-5">
         <Link
           to="/admin"
@@ -58,7 +57,13 @@ const DeleteProduct = () => {
           className="bg-red-600 hover:bg-red-800  
                                                                 py-2 px-4 rounded-lg w-full"
         >
-          Confirm
+          {loading ? (
+            <>
+              Deleting <LoadingDots size={'xs'} />
+            </>
+          ) : (
+            'Confirm'
+          )}
         </button>
       </div>
     </div>

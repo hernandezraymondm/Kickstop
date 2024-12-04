@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import Spinner from '../components/Loader/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const CreateProduct = () => {
   const [name, setName] = useState('');
@@ -120,7 +120,6 @@ const CreateProduct = () => {
 
   return (
     <div className="p-2 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-100">
         <Link
           to="/admin"
@@ -228,7 +227,13 @@ const CreateProduct = () => {
             className="w-full bg-green-500
                             hover:bg-green-800 text-white py-2 px-4 rounded-md mt-6"
           >
-            Save
+            {loading ? (
+              <>
+                Saving <LoadingDots size={'xs'} />
+              </>
+            ) : (
+              'Save'
+            )}
           </button>
         </div>
       </div>

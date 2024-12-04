@@ -2,7 +2,7 @@ import { useSnackbar } from 'notistack';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Spinner from '../components/Loader/Spinner';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const EditProduct = () => {
   const [name, setName] = useState('');
@@ -30,12 +30,12 @@ const EditProduct = () => {
     axios
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product/${id}`)
       .then((response) => {
+        setLoading(false);
         setName(response.data.name);
         setPriceInPesos((response.data.priceInCents / 100).toFixed(2)); // Convert cents to pesos
         setCategory(response.data.category);
         setTarget(response.data.target);
         setDescription(response.data.description);
-        setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
@@ -68,7 +68,6 @@ const EditProduct = () => {
 
   return (
     <div className="p-6 bg-base-100 flex justify-center items-center">
-      {loading && <Spinner />}
       <div className="container max-w-lg shadow-lg rounded-lg p-5 bg-base-200">
         <Link
           to="/admin"
@@ -152,7 +151,13 @@ const EditProduct = () => {
             onClick={handleEditProduct}
             className="w-full bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
           >
-            Save Changes
+            {loading ? (
+              <>
+                Saving Changes <LoadingDots size={'xs'} />
+              </>
+            ) : (
+              'Saving Changes'
+            )}
           </button>
         </div>
       </div>

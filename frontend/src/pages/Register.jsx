@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -23,7 +23,7 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (userData.password !== userData.password2) {
       setIsSuccess(false);
       setStatusMessage('Passwords do not match');
@@ -48,10 +48,12 @@ const Register = () => {
       );
 
       setIsSuccess(true);
+      setLoading(false);
       setStatusMessage('Registration successful');
       navigate('/login');
     } catch (error) {
       setIsSuccess(false);
+      setLoading(false);
       setStatusMessage(error.response?.data?.message || 'An error occurred');
     }
   };
@@ -73,6 +75,7 @@ const Register = () => {
         </p>
       )}
 
+      {loading && <LoadingDots size={'lg'} />}
       <form
         className="w-full max-w-xs flex flex-col gap-4"
         onSubmit={submitHandler}

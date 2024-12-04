@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
@@ -19,17 +20,18 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/login`,
         loginData
       );
-      console.log(response.data);
-
+      // console.log(response.data);
       localStorage.setItem('token', response.data.token);
-
+      setLoading(false);
       navigate('/admin');
     } catch (error) {
+      setLoading(false);
       if (error.response) {
         setStatusMessage(error.response.data.message);
       } else if (error.request) {
@@ -49,7 +51,7 @@ const Login = () => {
       {statusMessage && (
         <p className="text-red-500 text-xs italic mb-2">{statusMessage}</p>
       )}
-
+      {loading && <LoadingDots size={'lg'} />}
       <form
         className="w-full max-w-xs flex flex-col gap-4"
         onSubmit={submitHandler}
