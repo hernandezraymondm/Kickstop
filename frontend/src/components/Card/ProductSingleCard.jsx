@@ -83,14 +83,14 @@ const ProductSingleCard = ({ product }) => {
         <div className="mt-2">
           {quantity > 0 ? (
             <button
-              className="btn btn-error btn-sm w-full"
+              className="btn btn-error btn-xs sm:btn-sm w-full text-wrap"
               onClick={handleRemoveFromCart}
             >
               Remove from Cart
             </button>
           ) : (
             <button
-              className="btn btn-primary btn-sm w-full"
+              className="btn btn-primary btn-xs sm:btn-sm w-full truncate"
               onClick={handleAddToCart}
             >
               Add to Cart
