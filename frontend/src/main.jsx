@@ -5,12 +5,15 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { CartProvider } from './context/CartContext.jsx';
+import { LikeProvider } from './context/LikeContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <SnackbarProvider>
       <CartProvider>
-        <App />
+        <LikeProvider>
+          <App />
+        </LikeProvider>
       </CartProvider>
     </SnackbarProvider>
   </BrowserRouter>

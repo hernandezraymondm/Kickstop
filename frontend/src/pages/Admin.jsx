@@ -73,7 +73,7 @@ const Admin = () => {
                     <Link
                       to={`/admin/product/edit/${product._id}`}
                       className="bg-orange-500 hover:bg-orange-900
-                     text-white py-2 px-4 font-medium rounded-l-lg text-sm"
+                    text-white py-2 px-4 font-medium rounded-l-lg text-sm"
                     >
                       Edit
                     </Link>
@@ -81,7 +81,7 @@ const Admin = () => {
                     <Link
                       to={`/admin/product/delete/${product._id}`}
                       className="bg-red-500 hover:bg-red-900
-                     text-white py-2 px-4 font-medium rounded-r-lg text-sm"
+                    text-white py-2 px-4 font-medium rounded-r-lg text-sm"
                     >
                       Delete
                     </Link>

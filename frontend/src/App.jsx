@@ -16,6 +16,7 @@ import Register from './pages/Register';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './routes/ProtectedRoutes';
+import LikedItems from './pages/Liked';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/liked" element={<LikedItems />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<Contact />} />
