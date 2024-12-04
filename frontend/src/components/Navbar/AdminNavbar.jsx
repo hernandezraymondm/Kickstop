@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggleButton from '../Button/ThemeToggleButton';
 import CartIcon from '../Icon/CartIcon';
 import UserIcon from '../Icon/UserIcon';
 import HeartIcon from '../Icon/HeartIcon';
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ toggleSidebar }) => {
+  const location = useLocation();
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setMobileDrawerOpen(!mobileDrawerOpen);
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
   };
-
-  const location = useLocation();
 
   const getLinkClass = (path) =>
     location.pathname === path
@@ -20,31 +25,28 @@ const AdminNavbar = () => {
   const isHome = location.pathname === '/';
 
   return (
-    <div id="featured" className="navbar mx-auto text-accent-content">
+    <div id="featured" className="navbar mx-auto text-accent-content pr-5">
       <div className="navbar-start xl:gap-4">
         {/* Hamburger Menu - only shows on homepage */}
 
         <button
           className={`${
-            isHome && 'btn-ghost cursor-pointer'
-          } cursor-default rounded-lg hidden md:flex fixed`}
+            isHome && 'cursor-pointer'
+          } ml-2 mt-2 cursor-default rounded-lg hidden md:flex fixed`}
+          onClick={toggleSidebar}
         >
-          <svg viewBox="0 0 32 32" className="h-12">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="h-11"
+          >
             <path
-              className="line line-top-bottom"
-              d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-            <path
-              className="line"
-              d="M7 16 27 16"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25"
             />
           </svg>
         </button>
@@ -95,69 +97,141 @@ const AdminNavbar = () => {
       </div>
 
       {/* Icons */}
-      <div className="navbar-end sm:gap-5">
-        <Link to="/liked" className="tooltip tooltip-bottom" data-tip="Liked">
+      <div className="navbar-end gap-1 sm:gap-5">
+        <Link
+          to="/liked"
+          className="tooltip tooltip-bottom hidden sm:block"
+          data-tip="Liked"
+        >
           <HeartIcon />
         </Link>
-        <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Cart">
+        <Link to="/cart" className="hidden sm:block">
           <CartIcon />
         </Link>
-        <ThemeToggleButton />
-        <Link to="/login" className="tooltip tooltip-bottom" data-tip="Account">
-          <UserIcon />
-        </Link>
-        <details className="dropdown dropdown-end">
-          <summary className="btn btn-ghost hamburger lg:hidden">
-            <svg
-              viewBox="0 0 32 32"
-              className="h-12 transition-transform duration-600 ease-in-out transform-gpu"
-            >
-              <path
-                className="line line-top-bottom"
-                d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-              <path
-                className="line"
-                d="M7 16 27 16"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-          </summary>
-          <ul className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52 uppercase">
+        <div className="hidden sm:block">
+          <ThemeToggleButton />
+        </div>
+
+        <div className="dropdown dropdown-end dropdown-hover">
+          <Link to="/admin">
+            <UserIcon />
+          </Link>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-44 p-2 shadow gap-1"
+          >
             <li>
-              <Link to="/" className={getLinkClass('/')}>
-                Home
+              <Link to={'/admin'} className="btn-ghost font-bold">
+                Account
               </Link>
             </li>
             <li>
-              <Link to="/shop" className={getLinkClass('/shop')}>
-                Shop
+              <Link to={'/admin'} className="btn-ghost font-bold">
+                Purchase
               </Link>
             </li>
             <li>
-              <Link to="/about" className={getLinkClass('/about')}>
-                About
+              <Link to={'/admin'} className="btn-ghost font-bold">
+                Notification
               </Link>
             </li>
             <li>
-              <Link to="/contact" className={getLinkClass('/contact')}>
-                Contact
+              <Link to={'/'} onClick={logout} className="btn font-bold">
+                Logout
               </Link>
             </li>
           </ul>
-        </details>
-        <div className="navbar-center flex">
-          <Link to={'/'} onClick={logout} className="btn">
-            Logout
-          </Link>
         </div>
+
+        <button
+          onClick={toggleNavbar}
+          className={`btn-ghost rounded-lg hamburger lg:hidden z-20 ${
+            mobileDrawerOpen && 'fixed'
+          }`}
+          aria-expanded={mobileDrawerOpen ? 'true' : 'false'}
+          aria-label="Toggle navigation"
+        >
+          <svg
+            viewBox="0 0 32 32"
+            className={`h-12 transition-transform duration-600 ease-in-out transform-gpu ${
+              mobileDrawerOpen ? 'transform rotate-45' : ''
+            }`}
+          >
+            <path
+              className={`line line-top-bottom ${
+                mobileDrawerOpen ? 'line-top-bottom-open' : ''
+              }`}
+              d="M27 10L13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+            <path
+              className="line"
+              d="M7 16L27 16"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          </svg>
+        </button>
+        {mobileDrawerOpen && (
+          <div className="fixed top-0 right-0 z-10 flex w-full flex-col items-center justify-center bg-base-200 lg:hidden rounded-b-xl shadow-xl p-2">
+            <div className="self-start p-2 text-xl flex items-center">
+              <img
+                src="/assets/images/Logo.png"
+                width="30"
+                height="30"
+                alt="logo"
+              />
+              <h1 className="text-3xl font-bold uppercase">
+                <span className="text-secondary">K</span>ickstop
+              </h1>
+            </div>
+
+            <ul className="space-y-2 font-semibold text-xl text-center w-full py-4">
+              <li>
+                <Link to="/" className={getLinkClass('/')}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/shop" className={getLinkClass('/shop')}>
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className={getLinkClass('/about')}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className={getLinkClass('/contact')}>
+                  Contact
+                </Link>
+              </li>
+              <div className="flex justify-evenly pt-2 space-x-2 sm:hidden">
+                <Link
+                  to="/liked"
+                  className="tooltip tooltip-bottom"
+                  data-tip="Liked"
+                >
+                  <HeartIcon />
+                </Link>
+                <Link
+                  to="/cart"
+                  className="tooltip tooltip-bottom"
+                  data-tip="Cart"
+                >
+                  <CartIcon />
+                </Link>
+                <ThemeToggleButton />
+              </div>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

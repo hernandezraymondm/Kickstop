@@ -3,10 +3,10 @@ import { Link as ScrollLink } from 'react-scroll';
 
 const Sidebar = ({ isOpen }) => {
   return (
-    <div className="fixed w-20 h-full bg-base-100 flex-col justify-between items-center py-20 text-accent-content hidden md:flex">
+    <div className="fixed top-0 w-20 h-full bg-base-100 flex-col justify-between items-center text-accent-content hidden md:flex">
       {isOpen && (
         <>
-          <div className="flex flex-col items-center mt-14">
+          <div className="flex flex-col items-center mt-52">
             {/* Rotated Text */}
             <ul className="list-none p-0 flex flex-col space-y-32 uppercase font-semibold text-center">
               <li>

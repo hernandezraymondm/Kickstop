@@ -9,6 +9,7 @@ const Layout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isHome = location.pathname === '/';
+  const token = localStorage.getItem('token');
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -22,9 +23,9 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-[auto_1fr]">
-      <header className="col-span-2">
-        {isAdminRoute ? (
-          <AdminNavbar />
+      <header className="col-span-2 z-20">
+        {token ? (
+          <AdminNavbar toggleSidebar={toggleSidebar} />
         ) : (
           <Navbar toggleSidebar={toggleSidebar} />
         )}

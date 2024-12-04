@@ -38,8 +38,8 @@ const Filters = ({
   };
 
   return (
-    <div className="filters min-w-40 md:block gap-x-10 gap-y-4 grid sm:grid-cols-2 md:space-y-3 pr-4 shadow-lg rounded-xl p-5 bg-base-200">
-      <div className="form-control">
+    <div className="filters min-w-40 md:block gap-x-10 gap-y-4 grid grid-cols-2 md:space-y-3 pr-4 shadow-lg rounded-xl p-5 bg-base-200">
+      <div className="form-control col-span-2">
         <label className="label">
           <span className="label-text text-lg font-semibold text-accent-content whitespace-nowrap">
             Price Range, ₱
@@ -74,7 +74,7 @@ const Filters = ({
 
       <div className="divider hidden md:flex" />
 
-      <div className="form-control">
+      <div className="form-control col-span-2">
         <label className="label">
           <span className="label-text text-lg font-semibold text-accent-content">
             Category
@@ -156,7 +156,7 @@ const Filters = ({
                 {[...Array(5)].map((_, i) => (
                   <input
                     key={i}
-                    className={`mask mask-star-2 inline-block w-4 h-4 ${
+                    className={`mask mask-star-2 inline-block w-4 h-4 cursor-default ${
                       i < star ? 'bg-secondary' : 'bg-neutral-100'
                     }`}
                   ></input>
@@ -270,7 +270,7 @@ const Shop = () => {
       <div className="bg-base-200 collapse md:hidden">
         <input type="checkbox" className="peer" />
         <div className="collapse-title bg-base-200 font-semibold peer-checked:bg-base-300 text-center">
-          Click here to show/hide filters
+          Show/Hide filters
         </div>
         <div className="collapse-content bg-base-200 peer-checked:bg-base-300">
           <Filters
