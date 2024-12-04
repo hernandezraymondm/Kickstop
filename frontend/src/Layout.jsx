@@ -22,8 +22,8 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-[auto_1fr]">
-      <header className="col-span-2 z-20">
+    <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-x-clip">
+      <header className="col-span-2 z-20 w-screen">
         {token ? (
           <AdminNavbar toggleSidebar={toggleSidebar} />
         ) : (

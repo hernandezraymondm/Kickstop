@@ -20,7 +20,7 @@ const Navbar = ({ toggleSidebar }) => {
   const isHome = location.pathname === '/';
 
   return (
-    <div id="featured" className="navbar mx-auto text-accent-content pr-5">
+    <div id="featured" className="navbar mx-auto text-accent-content pr-8">
       <div className="navbar-start xl:gap-4">
         {/* Hamburger Menu - only shows on homepage */}
 
