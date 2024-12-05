@@ -14,7 +14,7 @@ const NavStart = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 23 23"
-            className="inline-block h-8 w-8 stroke-current"
+            className="inline-block h-7 w-7 stroke-current"
           >
             <path
               strokeLinecap="round"
