@@ -37,7 +37,7 @@ const CartIcon = () => {
         {totalQuantity > 0 && (
           <div
             tabIndex={0}
-            className="dropdown-content w-52 bg-base-100 shadow rounded-box z-[1]"
+            className="dropdown-content w-52 bg-base-200 shadow rounded-box z-[1]"
           >
             <div className="card-body">
               <span className="font-bold text-lg text-accent-content">

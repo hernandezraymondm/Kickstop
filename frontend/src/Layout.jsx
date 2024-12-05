@@ -17,18 +17,10 @@ const Layout = () => {
     setIsOpen(isHome);
   }, [isHome]);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-x-clip">
-      <header className="col-span-2 z-20 w-screen sticky top-0 backdrop-blur-lg shadow-sm">
-        {token ? (
-          <AdminNavbar toggleSidebar={toggleSidebar} />
-        ) : (
-          <Navbar toggleSidebar={toggleSidebar} />
-        )}
+    <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-clip">
+      <header className="col-span-2 z-20 sticky top-0 backdrop-blur-lg shadow-sm md:px-2 xl:px-16">
+        {token ? <AdminNavbar /> : <Navbar />}
       </header>
 
       {isHome && (

@@ -6,43 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@media (min-width: 530px) {
+  .sidebar-menu {
+    width: 350px;
   }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-.hamburger {
-  cursor: pointer;
-}
-
-.hamburger svg {
-  height: 3em;
-  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3;
-  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-top-bottom {
-  stroke-dasharray: 12 63;
-}
-
-.line-top-bottom-open {
-  stroke-dasharray: 20 300;
-  stroke-dashoffset: -32.42;
-}
-
-button[aria-expanded='true'] .hamburger svg {
-  transform: rotate(-45deg);
 }
