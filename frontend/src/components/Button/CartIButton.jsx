@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
 
-const CartIcon = () => {
+const CartButton = () => {
   const { cartItems } = useCart();
 
   const totalQuantity = cartItems.reduce(
@@ -54,4 +54,4 @@ const CartIcon = () => {
   );
 };
 
-export default CartIcon;
+export default CartButton;

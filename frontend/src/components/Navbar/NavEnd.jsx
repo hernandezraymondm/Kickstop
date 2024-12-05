@@ -1,8 +1,8 @@
 import React from 'react';
 import ThemeToggleButton from '../Button/ThemeToggleButton';
-import HeartIcon from '../Icon/HeartIcon';
 import { Link } from 'react-router-dom';
-import CartIcon from '../Icon/CartIcon';
+import CartButton from '../Button/CartIButton';
+import LikeButton from '../Button/LikeButton';
 
 const NavEnd = () => {
   return (
@@ -13,10 +13,10 @@ const NavEnd = () => {
         className="tooltip tooltip-bottom hidden sm:block"
         data-tip="Liked"
       >
-        <HeartIcon />
+        <LikeButton />
       </Link>
       <Link to="/cart" className="hidden sm:block">
-        <CartIcon />
+        <CartButton />
       </Link>
     </>
   );

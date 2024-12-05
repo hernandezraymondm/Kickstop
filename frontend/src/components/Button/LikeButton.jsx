@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLike } from '../../context/LikeContext';
 
-const HeartIcon = () => {
+const LikeButton = () => {
   const { likeItems } = useLike();
 
   const totalQuantity = likeItems.length;
@@ -33,4 +33,4 @@ const HeartIcon = () => {
   );
 };
 
-export default HeartIcon;
+export default LikeButton;

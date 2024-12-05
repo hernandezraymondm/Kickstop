@@ -6,11 +6,13 @@ const CollectionCard = ({ name, background, target }) => {
   return (
     <div className="hover:scale-110 transition-transform duration-300">
       <div
-        className="section hero w-96 shadow-xl rounded-xl"
+        className="section hero w-full shadow-xl rounded-xl"
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="card-body items-center text-center">
-          <h2 className="card-title pb-32 text-black">{name}</h2>
+          <h2 className="card-title pb-40 sm:pb-56 lg:pb-40 text-black">
+            {name}
+          </h2>
           <div className="card-actions">
             <Link
               to={`/shop?target=${target}`}
