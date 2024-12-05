@@ -15,6 +15,7 @@ const Sidebar = ({ isOpen }) => {
                     to="featured"
                     smooth={true}
                     duration={500}
+                    offset={-65}
                     spy={true}
                     activeClass="text-secondary"
                     className="btn-ghost rounded-lg p-2 text-accent-content text-lg cursor-pointer"
@@ -29,6 +30,7 @@ const Sidebar = ({ isOpen }) => {
                     to="collection"
                     smooth={true}
                     duration={500}
+                    offset={-50}
                     spy={true}
                     activeClass="text-secondary"
                     className="btn-ghost rounded-lg p-2 text-lg cursor-pointer"
@@ -43,6 +45,7 @@ const Sidebar = ({ isOpen }) => {
                     to="bestsellers"
                     smooth={true}
                     duration={500}
+                    offset={-50}
                     spy={true}
                     activeClass="text-secondary"
                     className="btn-ghost rounded-lg p-2 text-accent-content text-lg cursor-pointer"
