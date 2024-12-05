@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
-    <div className="p-4 max-w-[1300px] mx-auto my-16">
+    <div className="p-4 max-w-[1300px] mx-auto my-5">
       <div className="hero-content text-center mb-24">
         <div className="max-w-xl">
           <h1 className="text-5xl font-bold">

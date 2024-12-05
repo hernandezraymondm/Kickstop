@@ -264,7 +264,7 @@ const Shop = () => {
   }, [product, category, target, stars, minPrice, maxPrice]);
 
   return (
-    <div className="p-4 max-w-[1650px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-8 lg:grid-cols-10 gap-y-6 md:gap-3 2xl:gap-10">
+    <div className="p-4 max-w-[1650px] mx-auto mt-11 grid grid-cols-1 md:grid-cols-8 lg:grid-cols-10 gap-y-6 md:gap-3 2xl:gap-10">
       {/* Sidebar Filters */}
       {/* Small Screen Filter*/}
       <div className="bg-base-200 collapse md:hidden">

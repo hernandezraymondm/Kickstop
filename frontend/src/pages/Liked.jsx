@@ -14,7 +14,7 @@ const LikedItems = () => {
   }
 
   return (
-    <div className="p-4 my-16 max-w-[1400px] mx-auto">
+    <div className="p-4 my-4 max-w-[1400px] mx-auto">
       <h2 className="text-2xl font-semibold text-center my-6">Liked Items</h2>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">

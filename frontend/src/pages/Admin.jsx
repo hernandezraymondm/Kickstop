@@ -26,7 +26,7 @@ const Admin = () => {
   }, []);
 
   return (
-    <div className="px-4 py-8 max-w-7xl mx-auto">
+    <div className="px-4 py-3 max-w-7xl mx-auto">
       <Stats />
 
       <div className="overflow-x-auto">
