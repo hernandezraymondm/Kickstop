@@ -29,7 +29,7 @@ const ProductSingleCard = ({ product }) => {
   };
 
   return (
-    <div className="hover:scale-110 transition-transform duration-300 bg-base-100 shadow-xl rounded-lg overflow-hidden whitespace-nowrap">
+    <div className="sm:hover:scale-110 transition-transform duration-300 bg-base-100 shadow-xl rounded-lg overflow-hidden whitespace-nowrap">
       <figure className="relative">
         <img
           src={product.image}
