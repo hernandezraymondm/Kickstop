@@ -23,7 +23,7 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-x-clip">
-      <header className="col-span-2 z-20 w-screen">
+      <header className="col-span-2 z-20 w-screen sticky top-0 backdrop-blur-lg shadow-sm">
         {token ? (
           <AdminNavbar toggleSidebar={toggleSidebar} />
         ) : (

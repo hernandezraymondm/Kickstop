@@ -22,12 +22,14 @@ const CardSkeleton = ({ cards }) => {
           </div>
         </div>
         <div className="card-body bg-base-200 rounded-b-xl p-4">
-          <div className="skeleton h-3 w-1/2 mt-1" />
+          <div className="skeleton h-3 w-32 mt-1" />
           <div className="skeleton h-3 w-full mt-[2px]" />
           <div className="skeleton h-3 w-full mt-[2px]" />
-          <div className="skeleton h-3 w-1/2" />
+          <div className="flex items-center">
+            <div className="skeleton h-3 w-24" />
+          </div>
           <div className="mt-2">
-            <div className="skeleton h-5 sm:h-7 w-full rounded-lg" />
+            <div className="skeleton h-7 w-full rounded-lg" />
           </div>
         </div>
       </div>
