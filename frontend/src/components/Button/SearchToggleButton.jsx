@@ -8,12 +8,12 @@ const SearchToggleButton = () => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mr-2">
       {isSearchOpen ? (
         <div className="relative flex items-center transition-all duration-300 ease-in-out">
           <input
             type="text"
-            className="input input-sm input-bordered pr-8 grow transform transition-all duration-300 ease-in-out w-0 focus:w-60"
+            className="input input-sm input-bordered pr-8 grow transform transition-all duration-300 ease-in-out w-0 focus:w-52"
             placeholder="Search product"
             autoFocus
             onBlur={() => setIsSearchOpen(false)} // Close when input loses focus
@@ -35,7 +35,7 @@ const SearchToggleButton = () => {
         </div>
       ) : (
         <button
-          className="p-2 text-secondary"
+          className="btn btn-ghost btn-circle text-secondary"
           onClick={toggleSearch}
           aria-label="Open Search"
         >

@@ -22,10 +22,10 @@ const Navbar = () => {
           <div className="navbar-start xl:gap-4">
             <NavStart />
           </div>
-          <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden xl:flex">
             <NavCenter getLinkClass={getLinkClass} />
           </div>
-          <div className="navbar-end gap-5">
+          <div className="navbar-end gap-3">
             <NavEnd />
           </div>
         </div>

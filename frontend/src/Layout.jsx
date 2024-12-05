@@ -17,7 +17,7 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-[auto_1fr] overflow-clip">
-      <header className="col-span-2 z-20 sticky top-0 backdrop-blur-lg shadow-sm md:px-2 xl:px-16">
+      <header className="col-span-2 z-20 sticky top-0 backdrop-blur-lg shadow-sm lg:px-2 xl:px-[60px]">
         <Navbar />
       </header>
 
