@@ -26,7 +26,7 @@ const NavStart = () => {
         </label>
       </div>
       {/* Logo Icon */}
-      <Link to="/" className="-mt-1 text-xl flex items-center">
+      <Link to="/" className="lg:-mt-1 text-xl flex items-center">
         <img
           src="/assets/images/Logo.png"
           className="h-7 w-8 lg:h-8 lg:w-9"
