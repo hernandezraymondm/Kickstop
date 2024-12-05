@@ -6,7 +6,7 @@ const LinkedInIcon = ({ tooltip }) => {
       href="https://www.linkedin.com/in/raymond-hernandez-83703327a"
       target="_blank"
       rel="noopener noreferrer"
-      className={`tooltip tooltip-${tooltip}`}
+      className={`sm:tooltip sm:tooltip-${tooltip}`}
       aria-label="LinkedIn Profile"
       data-tip="LinkedIn"
     >

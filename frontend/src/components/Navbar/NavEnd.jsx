@@ -15,12 +15,16 @@ const NavEnd = () => {
 
       <Link
         to="/liked"
-        className="tooltip tooltip-bottom hidden sm:block"
+        className="sm:tooltip sm:tooltip-bottom hidden sm:block"
         data-tip="Liked"
       >
         <LikeButton />
       </Link>
-      <Link to="/cart" className="hidden sm:block">
+      <Link
+        to="/cart"
+        className="sm:tooltip sm:tooltip-bottom hidden sm:block"
+        data-tip="Cart"
+      >
         <CartButton />
       </Link>
     </>

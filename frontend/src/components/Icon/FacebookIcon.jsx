@@ -6,7 +6,7 @@ const FacebookIcon = ({ tooltip }) => {
       href="https://www.facebook.com/rayhernandez17/"
       target="_blank"
       rel="noopener noreferrer"
-      className={`tooltip tooltip-${tooltip}`}
+      className={`sm:tooltip sm:tooltip-${tooltip}`}
       aria-label="Facebook Profile"
       data-tip="Facebook"
     >

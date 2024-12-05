@@ -6,7 +6,7 @@ const GitHubIcon = ({ tooltip }) => {
       href="https://github.com/hernandezraymondm"
       target="_blank"
       rel="noopener noreferrer"
-      className={`tooltip tooltip-${tooltip}`}
+      className={`sm:tooltip sm:tooltip-${tooltip}`}
       aria-label="GitHub Profile"
       data-tip="GitHub"
     >

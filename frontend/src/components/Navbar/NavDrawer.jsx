@@ -74,12 +74,16 @@ const NavDrawer = ({ getLinkClass }) => {
             <ThemeToggleButton />
             <Link
               to="/liked"
-              className="tooltip tooltip-bottom"
+              className="sm:tooltip sm:tooltip-bottom"
               data-tip="Liked"
             >
               <LikeButton />
             </Link>
-            <Link to="/cart" className="tooltip tooltip-bottom" data-tip="Cart">
+            <Link
+              to="/cart"
+              className="sm:tooltip sm:tooltip-bottom"
+              data-tip="Cart"
+            >
               <CartButton />
             </Link>
           </div>
