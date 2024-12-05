@@ -3,11 +3,16 @@ import ThemeToggleButton from '../Button/ThemeToggleButton';
 import { Link } from 'react-router-dom';
 import CartButton from '../Button/CartIButton';
 import LikeButton from '../Button/LikeButton';
+import SearchToggleButton from '../Button/SearchToggleButton';
 
 const NavEnd = () => {
   return (
     <>
-      <ThemeToggleButton />
+      <SearchToggleButton />
+      <div className="hidden sm:flex">
+        <ThemeToggleButton />
+      </div>
+
       <Link
         to="/liked"
         className="tooltip tooltip-bottom hidden sm:block"

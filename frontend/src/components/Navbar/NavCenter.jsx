@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavCenter = ({ getLinkClass }) => {
   return (
     <>
-      <ul className="menu-horizontal px-5 gap-5 rounded-box uppercase">
+      <ul className="menu-horizontal gap-5 rounded-box uppercase">
         <li>
           <Link to="/" className={getLinkClass('/')}>
             <span className="btn btn-ghost text-lg font-semibold">Home</span>

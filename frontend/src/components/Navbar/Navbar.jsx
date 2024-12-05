@@ -25,7 +25,7 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <NavCenter getLinkClass={getLinkClass} />
           </div>
-          <div className="navbar-end gap-5 hidden sm:flex ">
+          <div className="navbar-end gap-5">
             <NavEnd />
           </div>
         </div>
