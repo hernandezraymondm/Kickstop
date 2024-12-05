@@ -58,7 +58,7 @@ const Cart = () => {
     <div className="p-4 my-16 max-w-[1400px] mx-auto">
       <h2 className="text-2xl font-semibold text-center my-6">Shopping Cart</h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cartItems.map((item, index) => (
           <div
             key={index}
