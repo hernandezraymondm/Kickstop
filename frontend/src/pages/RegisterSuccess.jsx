@@ -17,7 +17,7 @@ const RegisterSuccess = () => {
           </h1>
           <Link
             to="/login"
-            className="btn btn-success m-4 text-white text-lg font-semibold"
+            className="btn btn-success m-4 text-white sm:text-lg font-semibold"
           >
             <CircleArrowIcon />
             Login to your account
@@ -26,8 +26,9 @@ const RegisterSuccess = () => {
             Please check your registered email for email verification
           </h3>
           <p>
-            Simply <span className="text-success">Login to your account</span>{' '}
-            and the account login screen will appear. Once the login screen is
+            Simply tap{' '}
+            <span className="text-success">Login to your account</span> and the
+            account login screen will appear. Once the login screen is
             displayed, enter your email and you password.
           </p>
         </div>
