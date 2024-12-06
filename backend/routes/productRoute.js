@@ -96,24 +96,6 @@ router.put('/:id', auth, async (request, response) => {
   }
 });
 
-//DELETE PRODUCT ROUTE
-// router.delete('/:id', auth, async (request, response) => {
-//   try {
-//     const { id } = request.params;
-//     const result = await Product.findByIdAndDelete(id);
-//     if (!result) {
-//       return response.status(404).json({ message: 'Product not found' });
-//     }
-
-//     response
-//       .status(200)
-//       .json({ message: 'Product successfully deleted', deletedItem: result });
-//   } catch (error) {
-//     console.log(error.message);
-//     response.status(500).send({ message: error.message });
-//   }
-// });
-
 // DELETE PRODUCT ROUTE
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -152,5 +134,23 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+//DELETE PRODUCT ROUTE
+// router.delete('/:id', auth, async (request, response) => {
+//   try {
+//     const { id } = request.params;
+//     const result = await Product.findByIdAndDelete(id);
+//     if (!result) {
+//       return response.status(404).json({ message: 'Product not found' });
+//     }
+
+//     response
+//       .status(200)
+//       .json({ message: 'Product successfully deleted', deletedItem: result });
+//   } catch (error) {
+//     console.log(error.message);
+//     response.status(500).send({ message: error.message });
+//   }
+// });
 
 export default router;

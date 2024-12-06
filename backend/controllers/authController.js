@@ -8,19 +8,21 @@ const router = express.Router();
 //ROUTE FOR REGISTER
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+    const emailExists = await User.findOne({ email });
+    if (emailExists) {
+      return res.status(400).json({ message: 'Email already been used' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const userNameExists = await User.findOne({ username });
+    if (userNameExists) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
 
-    const newUser = new User({
-      email,
-      password: hashedPassword,
-    });
+    const hashedPassword = await bcrypt.hash(password, 11);
+
+    const newUser = new User({ username, email, password: hashedPassword });
 
     const savedUser = await newUser.save();
 
@@ -61,7 +63,7 @@ router.post('/login', async (req, res) => {
 
           res.json({
             token,
-            user: { id: user._id, email: user.email },
+            user: { id: user._id, email: user.email, username: user.username },
           });
         }
       );

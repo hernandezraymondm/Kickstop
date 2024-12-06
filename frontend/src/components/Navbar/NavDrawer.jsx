@@ -106,7 +106,7 @@ const NavDrawer = ({ getLinkClass }) => {
                   className="dropdown-content bg-base-200 rounded-box z-[1] w-44 shadow gap-1 overflow-hidden text-base space-y-3"
                 >
                   <div className="p-2 text-start bg-secondary text-white">
-                    @SuperAdmin
+                    @username
                   </div>
                   <div className="px-2 pb-3">
                     <li>

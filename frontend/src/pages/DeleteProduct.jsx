@@ -34,7 +34,9 @@ const DeleteProduct = () => {
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar('Error', { variant: 'error' });
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         console.log(error);
       });
   };

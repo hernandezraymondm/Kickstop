@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Stats from '../components/Tally/Stats';
+import { useSnackbar } from 'notistack';
 import TableSkeleton from '../components/Loader/TableSkeleton';
 
 const Admin = () => {
   const [product, setProduct] = useState([]);
-
+  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -16,11 +17,13 @@ const Admin = () => {
       .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
       .then((response) => {
         setProduct(response.data.data);
-
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         setLoading(false);
       });
   }, []);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import ArrowIcon from '../components/Icon/ArrowIcon';
 import Rating from '../components/Rating/Rating';
 import CollectionCard from '../components/Card/CollectionCard';
@@ -9,6 +10,7 @@ import ProductCard from '../components/Card/ProductCard';
 const Home = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     setLoading(true);
@@ -20,6 +22,9 @@ const Home = () => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         setLoading(false);
       });
   }, []);

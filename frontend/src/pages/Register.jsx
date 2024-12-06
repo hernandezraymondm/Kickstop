@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import LoadingDots from '../components/Loader/LoadingDots';
 
 const Register = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     password2: '',
@@ -40,7 +41,7 @@ const Register = () => {
       await axios.post(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/register`,
         {
-          name: userData.name,
+          username: userData.username,
           email: userData.email,
           password: userData.password,
         },
@@ -50,7 +51,7 @@ const Register = () => {
       setIsSuccess(true);
       setLoading(false);
       setStatusMessage('Registration successful');
-      navigate('/login');
+      navigate('/register/success');
     } catch (error) {
       setIsSuccess(false);
       setLoading(false);
@@ -83,8 +84,8 @@ const Register = () => {
         <input
           type="text"
           placeholder="Username"
-          name="name"
-          value={userData.name}
+          name="username"
+          value={userData.username}
           onChange={changeInputHandler}
           className="shadow border rounded-md w-full py-2 px-3 text-gray-700"
         />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/Card/ProductCard';
+import { useSnackbar } from 'notistack';
 
 const Filters = ({
   category,
@@ -182,6 +183,7 @@ const Filters = ({
 
 const Shop = () => {
   const location = useLocation();
+  const { enqueueSnackbar } = useSnackbar();
   const queryParams = new URLSearchParams(location.search);
   const targetFromUrl = queryParams.get('target');
   const [category, setCategory] = useState('');
@@ -218,6 +220,9 @@ const Shop = () => {
       })
       .catch((error) => {
         console.log(error);
+        enqueueSnackbar(error.response?.data?.message || error.message, {
+          variant: 'error',
+        });
         setLoading(false);
       });
   }, []);
