@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
 import ArrowIcon from '../components/Icon/ArrowIcon';
 import Rating from '../components/Rating/Rating';
 import CollectionCard from '../components/Card/CollectionCard';
@@ -10,23 +9,26 @@ import ProductCard from '../components/Card/ProductCard';
 const Home = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`
+      );
+      setProduct(response.data.data);
+    } catch (error) {
+      console.log(error);
+      setError(error.response?.data?.message || 'Failed to fetch products.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
-      .then((response) => {
-        setProduct(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        enqueueSnackbar(error.response?.data?.message || error.message, {
-          variant: 'error',
-        });
-        setLoading(false);
-      });
+    fetchData();
   }, []);
 
   const latestProducts = product.slice(0, 24);
@@ -198,7 +200,13 @@ const Home = () => {
         <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
           <div className="divider uppercase my-10">Bestsellers</div>
         </h1>
-        <ProductCard product={latestProducts} loading={loading} cards={24} />
+        <ProductCard
+          product={latestProducts}
+          loading={loading}
+          error={error}
+          fetchData={fetchData}
+          cards={24}
+        />
       </section>
     </>
   );

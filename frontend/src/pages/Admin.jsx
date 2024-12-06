@@ -2,30 +2,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Stats from '../components/Tally/Stats';
-import { useSnackbar } from 'notistack';
 import TableSkeleton from '../components/Loader/TableSkeleton';
 
 const Admin = () => {
   const [product, setProduct] = useState([]);
-  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-
-    axios
-      .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
-      .then((response) => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`
+        );
         setProduct(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
-        enqueueSnackbar(error.response?.data?.message || error.message, {
-          variant: 'error',
-        });
+        setError(error.response?.data?.message || 'Failed to fetch products.');
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -55,45 +56,69 @@ const Admin = () => {
 
           <tbody>
             {loading && <TableSkeleton rows={24} />}
-            {product.map((product, index) => (
-              <tr key={product._id} className="bg-base-100 hover:bg-base-300">
-                <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3 px-5">{product.name}</td>
-                <td className="py-3 px-5">{product.priceInCents / 100}</td>
-                <td className="py-3 px-5">{product.category}</td>
-                <td className="py-3 px-5">{product.target}</td>
-                <td className="py-3 px-5">{product.description}</td>
-                <td className="py-3 px-5">
-                  <div className="flex justify-center gap-x-1">
-                    <Link
-                      to={`/admin/product/edit/${product._id}`}
-                      className="bg-orange-500 hover:bg-orange-900
-                    text-white py-2 px-4 font-medium rounded-l-lg text-sm"
+            {error && (
+              <tr>
+                <td colSpan="7" className="text-center">
+                  <div className="flex mx-auto flex-col gap-5 w-64">
+                    <h1 className="text-2xl">{'Failed to load products.'}</h1>
+                    <button
+                      onClick={() => fetchData()}
+                      className="btn btn-error"
                     >
-                      Edit
-                    </Link>
-
-                    <Link
-                      to={`/admin/product/delete/${product._id}`}
-                      className="bg-red-500 hover:bg-red-900
-                    text-white py-2 px-4 font-medium rounded-r-lg text-sm"
-                    >
-                      Delete
-                    </Link>
+                      Retry
+                    </button>
                   </div>
                 </td>
               </tr>
-            ))}
+            )}
+            {!loading && product.length === 0 && (
+              <tr>
+                <td colSpan="7" className="text-center">
+                  No products available.
+                </td>
+              </tr>
+            )}
+            {!loading &&
+              !error &&
+              product.map((product, index) => (
+                <tr key={product._id} className="bg-base-100 hover:bg-base-300">
+                  <td>
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={product.image}
+                          alt={product.title}
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-3 px-5">{product.name}</td>
+                  <td className="py-3 px-5">{product.priceInCents / 100}</td>
+                  <td className="py-3 px-5">{product.category}</td>
+                  <td className="py-3 px-5">{product.target}</td>
+                  <td className="py-3 px-5">{product.description}</td>
+                  <td className="py-3 px-5">
+                    <div className="flex justify-center gap-x-1">
+                      <Link
+                        to={`/admin/product/edit/${product._id}`}
+                        className="bg-orange-500 hover:bg-orange-900
+                    text-white py-2 px-4 font-medium rounded-l-lg text-sm"
+                      >
+                        Edit
+                      </Link>
+
+                      <Link
+                        to={`/admin/product/delete/${product._id}`}
+                        className="bg-red-500 hover:bg-red-900
+                    text-white py-2 px-4 font-medium rounded-r-lg text-sm"
+                      >
+                        Delete
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
