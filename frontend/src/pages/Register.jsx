@@ -70,7 +70,7 @@ const Register = () => {
         <p
           className={`${
             isSuccess ? 'text-green-500' : 'text-red-500'
-          } text-lg italic mb-4`}
+          } text-xs italic mb-2 w-80 text-center`}
         >
           {statusMessage}
         </p>

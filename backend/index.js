@@ -8,7 +8,7 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import productRoute from './routes/productRoute.js';
 import stripeRoute from './routes/stripeRoute.js';
 import subscriberRoute from './routes/subscriberRoute.js';
-import { authRouter } from './controllers/authController.js';
+import authRouter from './routes/authRoute.js';
 
 config();
 

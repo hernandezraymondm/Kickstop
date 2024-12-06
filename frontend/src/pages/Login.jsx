@@ -49,7 +49,9 @@ const Login = () => {
     >
       <h2 className="text-2xl font-bold mb-10">Log In</h2>
       {statusMessage && (
-        <p className="text-red-500 text-xs italic mb-2">{statusMessage}</p>
+        <p className="text-red-500 text-xs italic mb-2 w-80 text-center">
+          {statusMessage}
+        </p>
       )}
       {loading && <LoadingDots size={'lg'} />}
       <form

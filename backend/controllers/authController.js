@@ -1,79 +1,65 @@
-import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
+import generateToken from '../utils/authUtils.js';
 
-const router = express.Router();
+// REGISTER
+const register = async (req, res) => {
+  const { username, email, password } = req.body;
 
-//ROUTE FOR REGISTER
-router.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const user = await User.register(username, email, password);
+    const token = generateToken({ id: user._id });
 
-    const emailExists = await User.findOne({ email });
-    if (emailExists) {
-      return res.status(400).json({ message: 'Email already been used' });
-    }
-
-    const userNameExists = await User.findOne({ username });
-    if (userNameExists) {
-      return res.status(400).json({ message: 'Username already exists' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 11);
-
-    const newUser = new User({ username, email, password: hashedPassword });
-
-    const savedUser = await newUser.save();
-
-    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+    res.status(201).json({
+      token,
+      message: 'User registered successfully',
     });
-
-    res.status(201).json({ token, message: 'User registered successfully' });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
-  }
-});
+    console.error('Error during registration:', error);
 
-//ROUTE FOR LOGIN
-router.post('/login', async (req, res) => {
+    // Check error message and classify
+    if (error.message.includes('already in use')) {
+      return res.status(409).json({ message: error.message }); // Conflict
+    } else if (
+      error.message.includes('must be filled') ||
+      error.message.includes('not valid') ||
+      error.message.includes('not strong enough')
+    ) {
+      return res.status(400).json({ message: error.message }); // Bad Request
+    }
+
+    res.status(500).json({ message: 'Internal server error' }); // Fallback
+  }
+};
+
+// LOGIN
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const user = await User.login(email, password);
+    const token = generateToken({ id: user._id, email: user.email });
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ massage: 'Invalid credentials' });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
-      const payload = {
-        id: user._id,
-        email: user.email,
-      };
-
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: 3600 },
-        (error, token) => {
-          if (error) throw error;
-
-          res.json({
-            token,
-            user: { id: user._id, email: user.email, username: user.username },
-          });
-        }
-      );
-    } else {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
+    res.status(200).json({
+      token,
+      user: { id: user._id, email: user.email, username: user.username },
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
-  }
-});
+    console.error('Login error:', error);
 
-export { router as authRouter };
+    // Check error message and classify
+    if (
+      error.message.includes('must be filled') ||
+      error.message.includes('not valid')
+    ) {
+      return res.status(400).json({ message: error.message }); // Bad Request
+    } else if (error.message.includes('Invalid email or password')) {
+      return res.status(401).json({ message: error.message }); // Unauthorized
+    }
+
+    res.status(500).json({ message: 'Internal server error' }); // Fallback
+  }
+};
+
+export { register, login };
