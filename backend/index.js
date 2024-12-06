@@ -2,70 +2,41 @@ import express from 'express';
 import { config } from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import { setupCloudinary } from './utils/cloudinary.js';
+import uploadRouter from './routes/uploadRoute.js';
 import productRoute from './routes/productRoute.js';
 import stripeRoute from './routes/stripeRoute.js';
 import subscriberRoute from './routes/subscriberRoute.js';
 import authRouter from './routes/authRoute.js';
 
+// Load environment variables
 config();
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB)
-  .then(() => console.log('Database is connected'))
-  .catch((error) => console.log(error));
+  .connect(process.env.MONGODB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Database connected successfully'))
+  .catch((error) => console.error('Database connection error:', error));
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// Setup Cloudinary
+setupCloudinary();
 
-app.use((req, res, next) => {
-  req.cloudinary = cloudinary;
-  next();
-});
+// Routes
+app.use('/upload', uploadRouter); // Handles image uploads
+app.use('/product', productRoute); // Handles product-related routes
+app.use('/stripe', stripeRoute); // Handles Stripe integration
+app.use('/subscriber', subscriberRoute); // Handles subscriber-related routes
+app.use('/auth', authRouter); // Handles authentication-related routes
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'images',
-    allowedFormats: ['jpeg', 'png', 'jpg'],
-  },
-});
-
-const parser = multer({ storage: storage });
-
-//ROUTE FOR UPLOADING THE FILE TO CLOUDINARY
-app.post('/upload-image', parser.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded.');
-  }
-
-  try {
-    if (!req.file.path) {
-      throw new Error('File uploaded, but no path available');
-    }
-
-    res.json({ secure_url: req.file.path });
-  } catch (error) {
-    console.error('Error during file upload: ', error);
-    res.status(500).send('Internal server error');
-  }
-});
-
-app.use('/product', productRoute);
-app.use('/stripe', stripeRoute);
-app.use('/subscriber', subscriberRoute);
-app.use('/auth', authRouter);
-
-app.listen(process.env.PORT, () =>
-  console.log(`Server running on ${process.env.PORT} PORT`)
-);
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));

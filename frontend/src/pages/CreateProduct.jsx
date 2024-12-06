@@ -52,7 +52,7 @@ const CreateProduct = () => {
     try {
       const uploadUrl = `${
         import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
-      }/upload-image`;
+      }/upload/image`;
       const res = await axios.post(uploadUrl, data);
 
       const { secure_url } = res.data;

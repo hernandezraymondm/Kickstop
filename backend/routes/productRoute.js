@@ -1,6 +1,7 @@
 import express from 'express';
 import { Product } from '../models/productModel.js';
 import { auth } from '../middleware/authMiddleware.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 const router = express.Router();
 
@@ -100,6 +101,8 @@ router.put('/:id', auth, async (request, response) => {
 router.delete('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Find and delete the product from the database
     const result = await Product.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({ message: 'Product not found' });
@@ -107,31 +110,26 @@ router.delete('/:id', auth, async (req, res) => {
 
     // Extract the public ID from the Cloudinary URL
     const imageUrl = result.image; // Assuming 'image' contains the full Cloudinary URL
-    const urlSegments = imageUrl.split('/');
-    const publicIdWithExtension = urlSegments.slice(-2).join('/'); // Get the last two segments
-    const publicId = publicIdWithExtension.split('.').slice(0, -1).join('.'); // Remove the file extension
+    if (imageUrl) {
+      const urlSegments = imageUrl.split('/');
+      const publicIdWithExtension = urlSegments.slice(-2).join('/'); // Get the last two segments
+      const publicId = publicIdWithExtension.split('.').slice(0, -1).join('.'); // Remove the file extension
 
-    // Log the extracted public ID to verify
-    console.log('Extracted Public ID:', publicId);
+      // Log the extracted public ID to verify
+      console.log('Extracted Public ID:', publicId);
 
-    // Delete the image from Cloudinary
-    req.cloudinary.uploader.destroy(publicId, (error, result) => {
-      if (error) {
-        console.error('Error deleting image from Cloudinary:', error);
-        return res
-          .status(500)
-          .json({ message: 'Failed to delete image from Cloudinary' });
-      }
-      console.log('Deleted from Cloudinary:', result);
-    });
+      // Delete the image from Cloudinary
+      const cloudinaryResult = await cloudinary.uploader.destroy(publicId);
+      console.log('Deleted from Cloudinary:', cloudinaryResult);
+    }
 
     res.status(200).json({
-      message: 'Product and image successfully deleted',
+      message: 'Product and associated image successfully deleted',
       deletedItem: result,
     });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    console.error('Error deleting product or image:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
