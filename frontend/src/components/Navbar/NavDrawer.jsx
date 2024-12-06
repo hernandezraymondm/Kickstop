@@ -21,11 +21,11 @@ const NavDrawer = ({ getLinkClass }) => {
       <div className="self-start p-2 text-xl flex items-center min-w-0 overflow-hidden">
         <img
           src="/assets/images/Logo.png"
-          className="h-6 w-7 sm:h-7 sm:w-8 flex-shrink min-w-0 min-h-0 transition-all duration-300"
+          className="h-6 w-7 -mt-[3px]"
           alt="logo"
         />
-        <h1 className="text-2xl sm:text-3xl font-bold uppercase flex-shrink">
-          <span className="text-secondary">K</span>ickstop
+        <h1 className="text-2xl font-bold">
+          <span className="text-secondary">K</span>ickStop
         </h1>
       </div>
       <div className="h-full px-3 flex flex-col justify-between">
