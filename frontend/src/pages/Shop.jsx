@@ -202,31 +202,27 @@ const Shop = () => {
   const [product, setProduct] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`
-      );
-      const products = response.data.data;
-      setProduct(products);
-      setFilteredProducts(products);
-      const maxProductPrice =
-        Math.max(...products.map((p) => p.priceInCents)) / 100;
-      setMaxPrice(maxProductPrice);
-    } catch (error) {
-      console.log(error);
-      setError(error.response?.data?.message || 'Failed to fetch products.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    axios
+      .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
+      .then((response) => {
+        const products = response.data.data;
+        setProduct(products);
+        setFilteredProducts(products);
+        const maxProductPrice =
+          Math.max(...products.map((p) => p.priceInCents)) / 100;
+        setMaxPrice(maxProductPrice);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(
+          error.response?.data?.message || 'Failed to fetch products.'
+        );
+        setLoading(false);
+      });
   }, []);
 
   const filterProducts = () => {
@@ -311,13 +307,7 @@ const Shop = () => {
       </div>
       {/* Product Cards */}
       <div className="col-span-6 lg:col-span-8">
-        <ProductCard
-          product={filteredProducts}
-          loading={loading}
-          error={error}
-          fetchData={fetchData}
-          cards={24}
-        />
+        <ProductCard product={filteredProducts} loading={loading} cards={24} />
       </div>
     </div>
   );

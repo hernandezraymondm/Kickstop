@@ -9,26 +9,22 @@ import ProductCard from '../components/Card/ProductCard';
 const Home = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`
-      );
-      setProduct(response.data.data);
-    } catch (error) {
-      console.log(error);
-      setError(error.response?.data?.message || 'Failed to fetch products.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    axios
+      .get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/product`)
+      .then((response) => {
+        setProduct(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(
+          error.response?.data?.message || 'Failed to fetch products.'
+        );
+        setLoading(false);
+      });
   }, []);
 
   const latestProducts = product.slice(0, 24);
@@ -200,13 +196,7 @@ const Home = () => {
         <h1 className="text-2xl md:text-3xl font-semibold py-2 block text-accent text-center">
           <div className="divider uppercase my-10">Bestsellers</div>
         </h1>
-        <ProductCard
-          product={latestProducts}
-          loading={loading}
-          error={error}
-          fetchData={fetchData}
-          cards={24}
-        />
+        <ProductCard product={latestProducts} loading={loading} cards={24} />
       </section>
     </>
   );
