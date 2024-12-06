@@ -29,7 +29,7 @@ const NavStart = () => {
       <Link to="/" className="lg:-mt-1 text-xl flex items-center">
         <img
           src="/assets/images/Logo.png"
-          className="h-7 w-8 -mt-[1px]"
+          className="h-7 w-8 -mt-[3px]"
           alt="logo"
         />
         <h1 className="text-3xl font-bold">
