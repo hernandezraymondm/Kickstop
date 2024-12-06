@@ -14,7 +14,7 @@ const NavStart = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 23 23"
-            className="inline-block h-7 w-7 stroke-current -mt-[3px]"
+            className="inline-block h-7 w-7 stroke-current -mt-[1px]"
           >
             <path
               strokeLinecap="round"
@@ -26,7 +26,7 @@ const NavStart = () => {
         </label>
       </div>
       {/* Logo Icon */}
-      <Link to="/" className="lg:-mt-1 text-xl flex items-center">
+      <Link to="/" className="text-xl flex items-center">
         <img
           src="/assets/images/Logo.png"
           className="h-7 w-8 -mt-[3px]"
