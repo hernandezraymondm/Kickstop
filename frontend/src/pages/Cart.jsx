@@ -76,9 +76,14 @@ const Cart = () => {
             <h2 className="font-bold text-lg text-accent truncate">
               {item.name}
             </h2>
-            <p className="text-md font-semibold mb-1">
-              Price: ₱{(item.priceInCents / 100).toFixed(2)}
-            </p>
+            <div className="flex items-center flex-wrap tracking-wider">
+              <span className="font-semibold text-base">
+                ₱{Math.floor(item.priceInCents / 100)}
+                <span className="text-sm text-neutral-500">
+                  {((item.priceInCents / 100) % 1).toFixed(2).substring(1)}
+                </span>
+              </span>
+            </div>
             <div className="flex items-center justify-between text-md mb-3">
               <p>Quantity: {item.quantity}</p>
               <div className="flex items-center">

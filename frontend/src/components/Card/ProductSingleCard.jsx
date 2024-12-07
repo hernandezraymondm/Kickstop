@@ -75,9 +75,12 @@ const ProductSingleCard = ({ product }) => {
         <p className="text-gray-700 text-xs sm:text-sm">
           {product.description || 'No description available.'}
         </p>
-        <div className="flex items-center flex-wrap">
-          <span className="text-secondary font-semibold">
-            ₱{(product.priceInCents / 100).toFixed(2)}
+        <div className="flex items-center flex-wrap tracking-wider">
+          <span className="text-accent font-semibold text-lg">
+            ₱{Math.floor(product.priceInCents / 100)}
+            <span className="text-sm text-neutral-500">
+              {((product.priceInCents / 100) % 1).toFixed(2).substring(1)}
+            </span>
           </span>
         </div>
         <div className="mt-2">
@@ -90,7 +93,7 @@ const ProductSingleCard = ({ product }) => {
             </button>
           ) : (
             <button
-              className="btn btn-primary btn-xs sm:btn-sm w-full truncate"
+              className="btn btn-success btn-xs sm:btn-sm w-full truncate"
               onClick={handleAddToCart}
             >
               Add to Cart

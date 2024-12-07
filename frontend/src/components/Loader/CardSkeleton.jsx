@@ -25,7 +25,7 @@ const CardSkeleton = ({ cards }) => {
           <div className="skeleton h-3 w-1/2 mt-1" />
           <div className="skeleton h-3 w-full mt-[2px]" />
           <div className="skeleton h-3 w-full mt-[2px]" />
-          <div className="skeleton h-3 w-1/2" />
+          <div className="skeleton h-4 w-1/2" />
           <div className="mt-2">
             <div className="skeleton h-5 sm:h-7 w-full rounded-lg" />
           </div>
