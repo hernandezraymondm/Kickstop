@@ -13,8 +13,8 @@ export default {
     themes: [
       {
         light: {
-          primary: '#fe7e3d',
-          secondary: '#fb4b29',
+          primary: '#FF8000',
+          secondary: '#fa5d0b',
           accent: '#404040',
           'accent-content': '#000000',
           info: '#9dc142',
@@ -22,7 +22,7 @@ export default {
           'base-100': '#E4E9EF',
         },
         dark: {
-          primary: '#fff248',
+          primary: '#FF9A00',
           secondary: '#fb4b29',
           accent: '#ffd6ae',
           'accent-content': '#ffffff',

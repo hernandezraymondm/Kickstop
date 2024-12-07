@@ -16,7 +16,7 @@ const CollectionCard = ({ name, background, target }) => {
           <div className="card-actions">
             <Link
               to={`/shop?target=${target}`}
-              className="btn-ghost btn-primary flex items-center gap-2 font-semibold text-lg border-2 border-current py-2 px-4 text-black hover:border-current hover:bg-secondary"
+              className="btn-ghost btn-primary flex items-center gap-2 font-semibold text-lg border-2 border-current py-2 px-4 text-black hover:border-current hover:bg-primary"
             >
               Explore All
               <ArrowIcon />

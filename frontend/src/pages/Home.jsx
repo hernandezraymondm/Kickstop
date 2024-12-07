@@ -53,7 +53,7 @@ const Home = () => {
 
             <Link
               to="/shop"
-              className="btn btn-secondary inline-flex items-center space-x-2 text-white font-semibold"
+              className="btn bg-secondary hover:bg-primary inline-flex items-center space-x-2 text-white font-semibold"
             >
               <span>EXPLORE OUR STORE</span>
               <ArrowIcon />
