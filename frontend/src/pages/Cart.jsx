@@ -13,7 +13,7 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="text-3xl text-center my-72">Your cart is empty.</div>
+      <div className="text-3xl text-center my-80">Your cart is empty.</div>
     );
   }
 

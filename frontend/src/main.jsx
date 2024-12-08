@@ -9,7 +9,10 @@ import { LikeProvider } from './context/LikeContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <SnackbarProvider>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+    >
       <CartProvider>
         <LikeProvider>
           <App />

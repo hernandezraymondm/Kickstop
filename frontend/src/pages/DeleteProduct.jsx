@@ -61,7 +61,7 @@ const DeleteProduct = () => {
         >
           {loading ? (
             <>
-              Deleting <LoadingDots size={'xs'} />
+              Deleting <LoadingDots size={'loading-xs'} />
             </>
           ) : (
             'Confirm'

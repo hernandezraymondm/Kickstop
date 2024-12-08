@@ -77,13 +77,19 @@ const EditProduct = () => {
         >
           Back
         </Link>
-        <h1 className="text-3xl font-semibold my-4 ">Edit Product</h1>
+        <div className="flex justify-start items-center gap-3">
+          <h1 className="text-3xl font-semibold my-4 ">Edit Product</h1>
+          {loading && (
+            <span className="loading loading-spinner text-secondary" />
+          )}
+        </div>
         <div className="my-4">
           <label htmlFor="name" className="block text-lg mb-2 mt-4">
             Name
           </label>
           <input
             id="name"
+            disabled={loading}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -95,6 +101,7 @@ const EditProduct = () => {
           </label>
           <input
             id="priceInPesos"
+            disabled={loading}
             type="text"
             value={priceInPesos}
             onChange={(e) => setPriceInPesos(e.target.value)}
@@ -107,6 +114,7 @@ const EditProduct = () => {
           </label>
           <select
             id="category"
+            disabled={loading}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -125,6 +133,7 @@ const EditProduct = () => {
           </label>
           <select
             id="target"
+            disabled={loading}
             value={target}
             onChange={(e) => setTarget(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -143,6 +152,7 @@ const EditProduct = () => {
           </label>
           <textarea
             id="description"
+            disabled={loading}
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -151,14 +161,15 @@ const EditProduct = () => {
 
           <button
             onClick={handleEditProduct}
+            disabled={loading}
             className="w-full bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
           >
-            {loading ? (
+            {loading && name ? (
               <>
-                Saving Changes <LoadingDots size={'xs'} />
+                Saving Changes <LoadingDots size={'loading-xs'} />
               </>
             ) : (
-              'Saving Changes'
+              'Save Changes'
             )}
           </button>
         </div>

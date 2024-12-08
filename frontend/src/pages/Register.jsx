@@ -76,7 +76,7 @@ const Register = () => {
         </p>
       )}
 
-      {loading && <LoadingDots size={'lg'} />}
+      {loading && <LoadingDots size={'loading-lg'} />}
       <form
         className="w-full max-w-xs flex flex-col gap-4"
         onSubmit={submitHandler}

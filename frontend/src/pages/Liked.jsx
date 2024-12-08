@@ -9,7 +9,7 @@ const LikedItems = () => {
 
   if (likeItems.length === 0) {
     return (
-      <div className="text-3xl text-center my-72">You have no liked items.</div>
+      <div className="text-3xl text-center my-80">You have no liked items.</div>
     );
   }
 

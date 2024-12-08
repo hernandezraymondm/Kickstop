@@ -134,6 +134,7 @@ const CreateProduct = () => {
           </label>
           <input
             id="name"
+            disabled={loading}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -145,6 +146,7 @@ const CreateProduct = () => {
           </label>
           <input
             id="priceInPesos"
+            disabled={loading}
             type="text"
             value={priceInPesos}
             onChange={(e) => setPriceInPesos(e.target.value)}
@@ -157,6 +159,7 @@ const CreateProduct = () => {
           </label>
           <select
             id="category"
+            disabled={loading}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -175,6 +178,7 @@ const CreateProduct = () => {
           </label>
           <select
             id="target"
+            disabled={loading}
             value={target}
             onChange={(e) => setTarget(e.target.value)}
             className="select select-accent w-full px-4 py-2"
@@ -194,6 +198,7 @@ const CreateProduct = () => {
           </label>
           <textarea
             id="description"
+            disabled={loading}
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -205,6 +210,7 @@ const CreateProduct = () => {
           </label>
           <input
             id="img"
+            disabled={loading}
             type="file"
             accept="image/*"
             onChange={handleFileChange}
@@ -224,12 +230,13 @@ const CreateProduct = () => {
 
           <button
             onClick={handleSaveProduct}
+            disabled={loading}
             className="w-full bg-green-500
                             hover:bg-green-800 text-white py-2 px-4 rounded-md mt-6"
           >
             {loading ? (
               <>
-                Saving <LoadingDots size={'xs'} />
+                Saving <LoadingDots size={'loading-xs'} />
               </>
             ) : (
               'Save'
