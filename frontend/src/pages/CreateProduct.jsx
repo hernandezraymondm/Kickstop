@@ -127,7 +127,12 @@ const CreateProduct = () => {
         >
           Back
         </Link>
-        <h1 className="text-3xl font-semibold my-4">Create Product</h1>
+        <div className="flex justify-start items-center gap-3">
+          <h1 className="text-3xl font-semibold my-4">Create Product</h1>
+          {loading && (
+            <span className="loading loading-spinner text-secondary" />
+          )}
+        </div>
         <div className="my-4">
           <label htmlFor="name" className="block text-lg mb-2 mt-4">
             Name
@@ -235,9 +240,10 @@ const CreateProduct = () => {
                             hover:bg-green-800 text-white py-2 px-4 rounded-md mt-6"
           >
             {loading ? (
-              <>
-                Saving <LoadingDots size={'loading-xs'} />
-              </>
+              <div className="flex justify-center items-center gap-2">
+                <p>Saving</p>
+                <LoadingDots size={'loading-xs'} />
+              </div>
             ) : (
               'Save'
             )}

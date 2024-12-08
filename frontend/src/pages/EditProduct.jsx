@@ -165,9 +165,10 @@ const EditProduct = () => {
             className="w-full bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md mt-4"
           >
             {loading && name ? (
-              <>
-                Saving Changes <LoadingDots size={'loading-xs'} />
-              </>
+              <div className="flex justify-center items-center gap-2">
+                <p>Saving Changes</p>
+                <LoadingDots size={'loading-xs'} />
+              </div>
             ) : (
               'Save Changes'
             )}
