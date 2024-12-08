@@ -60,9 +60,10 @@ const DeleteProduct = () => {
                                                                 py-2 px-4 rounded-lg w-full"
         >
           {loading ? (
-            <>
-              Deleting <LoadingDots size={'loading-xs'} />
-            </>
+            <div className="flex justify-center items-center gap-2">
+              <p>Deleting</p>
+              <LoadingDots size={'loading-xs'} />
+            </div>
           ) : (
             'Confirm'
           )}
