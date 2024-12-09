@@ -1,6 +1,6 @@
 import React from 'react';
-import { useCart } from '../../context/CartContext';
-import { useLike } from '../../context/LikeContext';
+import { useCart } from '../../contexts/CartContext';
+import { useLike } from '../../contexts/LikeContext';
 import Rating from '../Rating/Rating';
 
 const ProductSingleCard = ({ product }) => {

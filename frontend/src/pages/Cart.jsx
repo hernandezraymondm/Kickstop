@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../contexts/CartContext';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 

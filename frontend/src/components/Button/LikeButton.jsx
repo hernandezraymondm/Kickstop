@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLike } from '../../context/LikeContext';
+import { useLike } from '../../contexts/LikeContext';
 
 const LikeButton = () => {
   const { likeItems } = useLike();
