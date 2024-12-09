@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const LoadingDots = ({ size = 'loading-md' }) => {
   return (
