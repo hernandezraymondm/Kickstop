@@ -27,7 +27,7 @@ const Login = () => {
         loginData
       );
       // console.log(response.data);
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('NotAToken', response.data.token);
       setLoading(false);
       navigate('/admin');
     } catch (error) {

@@ -16,7 +16,7 @@ const EditProduct = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('NotAToken');
 
   const config = {
     headers: {
