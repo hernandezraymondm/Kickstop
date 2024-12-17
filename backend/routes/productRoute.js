@@ -1,12 +1,12 @@
 import express from 'express';
 import { Product } from '../models/productModel.js';
-import { auth } from '../middleware/authMiddleware.js';
+import { verifyToken } from '../middleware/verifyToken.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 const router = express.Router();
 
 //CREATE NEW PRODUCT ROUTE
-router.post('/', auth, async (request, response) => {
+router.post('/', verifyToken, async (request, response) => {
   try {
     if (
       !request.body.name ||
@@ -67,7 +67,7 @@ router.get('/:id', async (request, response) => {
 });
 
 //UPDATE PRODUCT ROUTE
-router.put('/:id', auth, async (request, response) => {
+router.put('/:id', verifyToken, async (request, response) => {
   try {
     if (
       !request.body.name ||
@@ -98,7 +98,7 @@ router.put('/:id', auth, async (request, response) => {
 });
 
 // DELETE PRODUCT ROUTE
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
 

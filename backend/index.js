@@ -2,6 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { setupCloudinary } from './utils/cloudinary.js';
 import uploadRouter from './routes/uploadRoute.js';
 import productRoute from './routes/productRoute.js';
@@ -15,8 +16,9 @@ config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Connect to MongoDB
 mongoose

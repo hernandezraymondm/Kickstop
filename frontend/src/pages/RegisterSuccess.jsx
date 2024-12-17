@@ -22,9 +22,6 @@ const RegisterSuccess = () => {
             <CircleArrowIcon />
             Login to your account
           </Link>
-          <h3 className="text-lg font-semibold text-center mb-2">
-            Please check your registered email for email verification
-          </h3>
           <p>
             Simply tap{' '}
             <span className="text-success">Login to your account</span> and the

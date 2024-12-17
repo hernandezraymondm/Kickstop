@@ -1,14 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-
-const isAuthenticated = () => {
-  return !!localStorage.getItem('NotAToken');
-};
+import { useAuth } from '../contexts/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
-  if (!isAuthenticated()) {
+  const { isAuthenticated, user } = useAuth();
+
+  console.log(isAuthenticated);
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
+
+  // if (!user.isVerified) {
+  //   return <Navigate to="/verify-email" replace />;
+  // }
 
   return children;
 };

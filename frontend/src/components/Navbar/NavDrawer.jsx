@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ThemeToggleButton from '../Button/ThemeToggleButton';
 import UserIcon from '../Icon/UserIcon';
 import CartButton from '../Button/CartIButton';
@@ -7,13 +7,13 @@ import LikeButton from '../Button/LikeButton';
 import LinkedInIcon from '../Icon/LinkedInIcon';
 import GitHubIcon from '../Icon/GitHubIcon';
 import FacebookIcon from '../Icon/FacebookIcon';
+import { useAuth } from '../../contexts/AuthContext';
 
 const NavDrawer = ({ getLinkClass }) => {
-  const location = useLocation();
-  const token = localStorage.getItem('NotAToken');
+  const { isAuthenticated, user, logout } = useAuth();
 
-  const logout = () => {
-    localStorage.removeItem('NotAToken');
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -95,7 +95,7 @@ const NavDrawer = ({ getLinkClass }) => {
             <FacebookIcon tooltip={'top'} />
           </div>
           <div className="divider" />
-          {token ? (
+          {isAuthenticated ? (
             <div className="flex justify-center items-center gap-4">
               <div className="dropdown dropdown-top dropdown-hover">
                 <Link to="/admin">
@@ -106,7 +106,7 @@ const NavDrawer = ({ getLinkClass }) => {
                   className="dropdown-content bg-base-200 rounded-box z-[1] w-44 shadow gap-1 overflow-hidden text-base space-y-3"
                 >
                   <div className="p-2 text-start bg-secondary text-white">
-                    @username
+                    {user.username}
                   </div>
                   <div className="px-2 pb-3">
                     <li>
@@ -138,7 +138,7 @@ const NavDrawer = ({ getLinkClass }) => {
               </div>
               <Link
                 to="/"
-                onClick={logout}
+                onClick={handleLogout}
                 className="w-full outline outline-1 rounded-lg bg-base-200 py-1 hover:bg-base-300 transition-colors duration-300 ease-in-out"
               >
                 Logout

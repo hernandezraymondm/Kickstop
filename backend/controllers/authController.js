@@ -1,5 +1,5 @@
 import User from '../models/userModel.js';
-import generateToken from '../utils/authUtils.js';
+import { generateTokenAndSetCookie } from '../utils/generateTokenAndSetCookie.js';
 
 // REGISTER
 const register = async (req, res) => {
@@ -7,10 +7,8 @@ const register = async (req, res) => {
 
   try {
     const user = await User.register(username, email, password);
-    const token = generateToken({ id: user._id });
 
     res.status(201).json({
-      token,
       message: 'User registered successfully',
     });
   } catch (error) {
@@ -37,11 +35,15 @@ const login = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
-    const token = generateToken({ id: user._id, email: user.email });
+    generateTokenAndSetCookie(res, user._id);
 
     res.status(200).json({
-      token,
-      user: { id: user._id, email: user.email, username: user.username },
+      success: true,
+      message: 'Logged in successfully',
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
     });
   } catch (error) {
     console.error('Login error:', error);
@@ -60,4 +62,25 @@ const login = async (req, res) => {
   }
 };
 
-export { register, login };
+const logout = async (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ success: true, message: 'Logged out successfully' });
+};
+
+const checkAuth = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password');
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'User not found' });
+    }
+
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.log('Error in checkAuth ', error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export { register, login, logout, checkAuth };

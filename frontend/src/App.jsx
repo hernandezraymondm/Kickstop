@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Admin from './pages/Admin';
@@ -18,8 +18,18 @@ import NotFound from './pages/NotFound';
 import ProtectedRoute from './routes/ProtectedRoutes';
 import LikedItems from './pages/Liked';
 import RegisterSuccess from './pages/RegisterSuccess';
+import { useAuth } from './contexts/AuthContext';
+import LoadingDots from './components/Loader/LoadingDots';
 
 function App() {
+  const { isCheckingAuth, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isCheckingAuth) return <LoadingDots />;
+
   return (
     <Routes>
       {/* Public Routes */}
