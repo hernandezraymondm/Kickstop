@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
-import Admin from './pages/Admin';
-import EditProduct from './pages/EditProduct';
-import DeleteProduct from './pages/DeleteProduct';
-import CreateProduct from './pages/CreateProduct';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Success from './pages/Success';
@@ -20,6 +16,7 @@ import LikedItems from './pages/Liked';
 import RegisterSuccess from './pages/RegisterSuccess';
 import { useAuth } from './contexts/AuthContext';
 import LoadingDots from './components/Loader/LoadingDots';
+import AdminRoutes from './routes/AdminRoutes';
 
 function App() {
   const { isCheckingAuth, checkAuth } = useAuth();
@@ -62,16 +59,5 @@ function App() {
     </Routes>
   );
 }
-
-const AdminRoutes = () => {
-  return (
-    <Routes>
-      <Route index element={<Admin />} />
-      <Route path="product/create" element={<CreateProduct />} />
-      <Route path="product/edit/:id" element={<EditProduct />} />
-      <Route path="product/delete/:id" element={<DeleteProduct />} />
-    </Routes>
-  );
-};
 
 export default App;

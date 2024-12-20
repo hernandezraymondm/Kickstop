@@ -11,3 +11,24 @@
     width: 350px;
   }
 }
+
+/* ===========
+Scroll bar 
+============*/
+
+/* Light mode */
+[data-theme='light'] {
+  --bg-primary: #afafaf;
+  --border-color: #dddddd;
+}
+
+/* Dark mode */
+[data-theme='dark'] {
+  --bg-primary: #4a5568;
+  --border-color: #121822;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-primary) var(--border-color);
+}

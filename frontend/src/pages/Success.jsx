@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useCart } from '../contexts/CartContext';
 
 const Success = () => {
