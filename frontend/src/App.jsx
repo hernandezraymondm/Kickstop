@@ -15,8 +15,8 @@ import ProtectedRoute from './routes/ProtectedRoutes';
 import LikedItems from './pages/Liked';
 import RegisterSuccess from './pages/RegisterSuccess';
 import { useAuth } from './contexts/AuthContext';
-import LoadingDots from './components/Loader/LoadingDots';
 import AdminRoutes from './routes/AdminRoutes';
+import SkeletonPage from './components/Loader/SkeletonPage';
 
 function App() {
   const { isCheckingAuth, checkAuth } = useAuth();
@@ -25,7 +25,7 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  if (isCheckingAuth) return <LoadingDots />;
+  if (isCheckingAuth) return <SkeletonPage />;
 
   return (
     <Routes>
