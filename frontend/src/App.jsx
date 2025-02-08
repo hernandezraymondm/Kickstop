@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Home from './pages/Home';
@@ -14,19 +13,9 @@ import NotFound from './pages/NotFound';
 import ProtectedRoute from './routes/ProtectedRoutes';
 import LikedItems from './pages/Liked';
 import RegisterSuccess from './pages/RegisterSuccess';
-import { useAuth } from './contexts/AuthContext';
 import AdminRoutes from './routes/AdminRoutes';
-import SkeletonPage from './components/Loader/SkeletonPage';
 
 function App() {
-  const { isCheckingAuth, checkAuth } = useAuth();
-
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
-
-  if (isCheckingAuth) return <SkeletonPage />;
-
   return (
     <Routes>
       {/* Public Routes */}

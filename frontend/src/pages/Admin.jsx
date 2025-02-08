@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Stats from '../components/Tally/Stats';
@@ -59,7 +59,7 @@ const Admin = () => {
                 </td>
               </tr>
             )}
-            {product.map((product, index) => (
+            {product.map((product) => (
               <tr key={product._id} className="bg-base-100 hover:bg-base-300">
                 <td>
                   <div className="avatar">
